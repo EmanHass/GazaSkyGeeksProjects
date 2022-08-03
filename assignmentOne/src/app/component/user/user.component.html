@@ -1,0 +1,72 @@
+<div class="content">
+    <table  cellPadding="5" cellSpacing="5">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Birthdate</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions <button class="add" (click)="onClickAdd()">+</button></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="users && users.length > 0">
+            <tr *ngFor="let item of users;let i = index;">
+                <td>{{item.id}}</td>
+                <td>{{item.name.firstName}} {{item.name.lastName}}</td>
+                <td>{{item.birthDate}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.address}}</td>
+                <td class="actions">
+                    <button class="editClass" (click)="onClickEdit(i)">Edit</button>
+                    <button class="deleteClass" (click)="deleteUser(i)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <form *ngIf="isAdd || isEdit">
+      <fieldset>
+        <legend>
+          <h2 *ngIf="isAdd">Add New User</h2>
+          <h2 *ngIf="isEdit">Edit User</h2>
+        </legend>
+      <div>
+        <h5>ID:</h5>
+        <input name="id" type="text" [(ngModel)]="id"/>
+      </div>
+      <div>
+        <h5>First Name:</h5>
+        <input name="firstName" type="text" [(ngModel)]="firstName"/>
+      </div>
+      <div>
+        <h5>Last Name:</h5>
+        <input name="lastName" type="text" [(ngModel)]="lastName"/>
+      </div>
+      <div>
+        <h5>BirthDate:</h5>
+        <input name="birthdate" type="text" [(ngModel)]="birthDate"/>
+      </div>
+      <div>
+        <h5>Email:</h5>
+        <input name="email" type="email" [(ngModel)]="email"/> 
+      </div>
+      <div>
+        <h5>Phone:</h5>
+        <input name="phone" type="text" [(ngModel)]="phone"/>
+      </div>
+      <div>
+        <h5>Address:</h5>
+        <input name="address" type="text" [(ngModel)]="address"/>
+      </div>
+      
+      <button class="create" (click)="fillUsersArray()" *ngIf="isAdd">Create</button>
+      <button class="editClass" (click)="editUser()" *ngIf="isEdit">Update</button>
+      <p class="errorMsg" *ngIf="isAdd && errorMsg">Please fill all inputs</p>
+    </fieldset>
+   
+    <h3 *ngIf="isEdit && msg">Please Make Sure You Have Updated</h3>
+    <h3 *ngIf="isAdd && msg">Please Make Sure You Add New User</h3>
+  </form>
+</div>

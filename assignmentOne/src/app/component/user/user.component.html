@@ -61,7 +61,7 @@
         <input name="address" type="text" [(ngModel)]="address"/>
       </div>
       
-      <button class="create" (click)="fillUsersArray()" *ngIf="isAdd">Create</button>
+      <button class="create" (click)="addUser()" *ngIf="isAdd">Create</button>
       <button class="editClass" (click)="editUser()" *ngIf="isEdit">Update</button>
       <p class="errorMsg" *ngIf="isAdd && errorMsg">Please fill all inputs</p>
     </fieldset>

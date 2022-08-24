@@ -1,6 +1,6 @@
 import { UsersService } from './../users.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-adduser',
@@ -9,20 +9,22 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AdduserComponent implements OnInit {
   registrationFG: FormGroup;
+  errorMsg: boolean=false;
+
   constructor(private usersService:UsersService) { 
     this.initializationFG();
   }
   initializationFG(): void {
     this.registrationFG= new FormGroup({
-      id: new FormControl('10'),
+      id: new FormControl('',[Validators.required]),
       name: new FormGroup({
-        firstName: new FormControl('samar'),
-        lastName: new FormControl('Mohammed')
+        firstName: new FormControl('',[Validators.required]),
+        lastName: new FormControl('',[Validators.required])
       }),
-      birthDate: new FormControl('1/1/1999'),
-      email: new FormControl('samar@gmail.com'),
-      phone: new FormControl('0591236547'),
-      address: new FormControl('Gaza')
+      birthDate: new FormControl('',[Validators.required]),
+      email: new FormControl('',[Validators.required]),
+      phone: new FormControl('',[Validators.required]),
+      address: new FormControl('',[Validators.required])
     })
   }
 
@@ -30,7 +32,11 @@ export class AdduserComponent implements OnInit {
   }
 
   onsubmitForm():void{
-    this.usersService.addUser(this.registrationFG.value)
+    if(this.registrationFG.valid)
+       this.usersService.addUser(this.registrationFG.value)
+       else{
+        this.errorMsg=true
+       }
   }
 
 }

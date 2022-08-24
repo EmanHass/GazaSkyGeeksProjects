@@ -8,11 +8,15 @@ import { UsersService } from '../users.service';
 })
 export class UsersListComponent implements OnInit {
   users:any[]=[];
+  id:string='';
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.users=this.usersService.getUsers()
+    this.users=this.usersService.getUsers();
   }
-
-
+  remove(idRemove: string):void{
+    this.usersService.removeUser(idRemove);
+    this.users=this.usersService.getUsers();
+  }
+  
 }

@@ -1,5 +1,5 @@
 <div>
-    <button routerLink="addUser">+</button>
+    <button routerLink="/users/addUser">+</button>
 </div>
 <table  cellPadding="5" cellSpacing="5">
     <thead>
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody *ngIf="users && users.length > 0">
-        <tr *ngFor="let item of users;let i = index;">
+        <tr *ngFor="let item of users; let i = index;">
             <td>{{item.id}}</td>
             <td>{{item.name.firstName}} {{item.name.lastName}}</td>
             <td>{{item.birthDate}}</td>
@@ -22,8 +22,8 @@
             <td>{{item.phone}}</td>
             <td>{{item.address}}</td>
             <td class="actions">
-                <button class="editClass">Edit</button>
-                <button class="deleteClass">Remove</button>
+                <button class="editClass" [routerLink]="['/users/edit/',item.id]">Edit</button>
+                <button class="deleteClass" (click)="remove(item.id)">Remove</button>
             </td>
         </tr>
     </tbody>

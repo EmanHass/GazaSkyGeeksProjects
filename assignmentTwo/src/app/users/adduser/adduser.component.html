@@ -89,11 +89,11 @@
         />
       </div>
     </div>
-    <button type="button" class="btn btn-success" (click)="onsubmitForm()">
+    <button type="button" class="btn btn-success" (click)="onsubmitForm()" [disabled]="registrationFG.invalid">
       Submit
     </button>
+    <div class="alert alert-success" *ngIf="success">
+      Succeeded: User added, <a routerLink="/users-list">Go to users-list...</a>
+    </div>
   </form>
-  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
-    Please Fill All inputs
-  </div>
 </div>

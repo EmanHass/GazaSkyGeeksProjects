@@ -1,6 +1,6 @@
 import { UsersService } from './../users.service';
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UpdateuserComponent implements OnInit {
     id:string;
     registrationFG: FormGroup;
+    success:boolean=false;
 
   constructor(private route: ActivatedRoute, private usersService:UsersService) {
     this.initializationFG();
@@ -18,15 +19,15 @@ export class UpdateuserComponent implements OnInit {
 
    initializationFG(): void {  
     this.registrationFG= new FormGroup({
-      id: new FormControl(''),
+      id: new FormControl('',Validators.required),
       name: new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl('')
+        firstName: new FormControl('',Validators.required),
+        lastName: new FormControl('',Validators.required)
       }),
-      birthDate: new FormControl(''),
-      email: new FormControl(''),
-      phone:new FormControl(''),
-      address: new FormControl('')
+      birthDate: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required,Validators.email]),
+      phone:new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required)
     })
   }
 
@@ -44,7 +45,9 @@ export class UpdateuserComponent implements OnInit {
   }
 
   onUpdate():void{
-    this.usersService.updateUser(this.id,this.registrationFG.value)
+    if(this.registrationFG.valid){
+    this.usersService.updateUser(this.id,this.registrationFG.value);
+    this.success=true;
+    }
   }
-
 }

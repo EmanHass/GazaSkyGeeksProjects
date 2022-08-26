@@ -9,8 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AdduserComponent implements OnInit {
   registrationFG: FormGroup;
-  errorMsg: boolean=false;
-
+  success:boolean=false;
+  
   constructor(private usersService:UsersService) { 
     this.initializationFG();
   }
@@ -22,7 +22,7 @@ export class AdduserComponent implements OnInit {
         lastName: new FormControl('',[Validators.required])
       }),
       birthDate: new FormControl('',[Validators.required]),
-      email: new FormControl('',[Validators.required]),
+      email: new FormControl('',[Validators.required, Validators.email]),
       phone: new FormControl('',[Validators.required]),
       address: new FormControl('',[Validators.required])
     })
@@ -32,11 +32,9 @@ export class AdduserComponent implements OnInit {
   }
 
   onsubmitForm():void{
-    if(this.registrationFG.valid)
-       this.usersService.addUser(this.registrationFG.value)
-       else{
-        this.errorMsg=true
-       }
+    if(this.registrationFG.valid){
+      this.usersService.addUser(this.registrationFG.value)
+      this.success=true;
+    }
   }
-
 }

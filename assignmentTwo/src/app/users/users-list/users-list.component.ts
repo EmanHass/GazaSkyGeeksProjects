@@ -8,7 +8,6 @@ import { UsersService } from '../users.service';
 })
 export class UsersListComponent implements OnInit {
   users:any[]=[];
-  id:string='';
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {

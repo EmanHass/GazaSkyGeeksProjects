@@ -1,5 +1,7 @@
 <div class="container">
-  <button class="btn btn-secondary" routerLink="/users-list">←</button>
+  <button class="btn btn-secondary" routerLink="/users-list">←</button><br />
+  <h4>Add New User:</h4>
+  <br />
   <form [formGroup]="registrationFG">
     <div class="form-group row">
       <label for="idUser" class="col-sm-2 col-form-label">ID:</label>
@@ -63,6 +65,21 @@
           name="email"
           formControlName="email"
         />
+        <div
+          class="invalid"
+          *ngIf="
+            registrationFG.get('email').value &&
+            registrationFG.get('email').errors
+          "
+        >
+          please enter a correct email that include "@xxxxxx"
+        </div>
+        <div
+          class="invalid"
+          *ngIf="registrationFG.get('email').errors?.['emailC']"
+        >
+          please Write a correct email that include ".com"
+        </div>
       </div>
     </div>
     <div class="form-group row">
@@ -75,6 +92,25 @@
           name="phone"
           formControlName="phone"
         />
+        <div
+          class="invalid"
+          *ngIf="registrationFG.get('phone').errors?.['isNumberic']"
+        >
+          please enter a number
+        </div>
+        <div
+          class="invalid"
+          *ngIf="registrationFG.get('phone').errors?.['startNumber']"
+        >
+          please enter a number start with '059' or '056'
+        </div>
+        <div
+          class="invalid"
+          *ngIf="registrationFG.get('phone').errors?.['maxMinLengthC']"
+        >
+          please enter valid phone number length :
+          {{registrationFG.get('phone').errors?.['min']}}
+        </div>
       </div>
     </div>
     <div class="form-group row">
@@ -89,7 +125,12 @@
         />
       </div>
     </div>
-    <button type="button" class="btn btn-success" (click)="onsubmitForm()" [disabled]="registrationFG.invalid">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="onsubmitForm()"
+      [disabled]="registrationFG.invalid"
+    >
       Submit
     </button>
     <div class="alert alert-success" *ngIf="success">

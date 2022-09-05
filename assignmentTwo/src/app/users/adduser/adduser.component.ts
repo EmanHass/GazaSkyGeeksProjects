@@ -30,7 +30,7 @@ export class AdduserComponent implements OnInit {
         firstName: new FormControl('', [Validators.required]),
         lastName: new FormControl('', [Validators.required]),
       }),
-      birthDate: new FormControl('', [Validators.required,Validators.maxLength(10), Validators.maxLength(10)]),
+      birthDate: new FormControl('', [Validators.required]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,

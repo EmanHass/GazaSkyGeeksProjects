@@ -20,6 +20,8 @@ export class AdduserComponent implements OnInit {
 
   constructor(private usersService: UsersService) {
     this.initializationFG();
+    console.log(this.registrationFG.get('birthDate').errors);
+    
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -28,7 +30,7 @@ export class AdduserComponent implements OnInit {
         firstName: new FormControl('', [Validators.required]),
         lastName: new FormControl('', [Validators.required]),
       }),
-      birthDate: new FormControl('', [Validators.required]),
+      birthDate: new FormControl('', [Validators.required,Validators.maxLength(10), Validators.maxLength(10)]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,

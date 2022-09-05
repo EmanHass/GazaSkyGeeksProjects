@@ -29,6 +29,9 @@
             formControlName="firstName"
           />
         </div>
+        <!-- <div *ngIf="registrationFG.get('name').get('firstName').errors?.['minLength']">
+          required
+        </div> -->
       </div>
       <div class="form-group row">
         <label for="lastname" class="col-sm-2 col-form-label">LastName:</label>
@@ -52,7 +55,14 @@
           id="birthDate"
           name="birthDate"
           formControlName="birthDate"
+          maxLength="10"
         />
+        <div *ngIf="registrationFG.get('birthDate').errors?.['required']">
+          required
+        </div>
+        <div *ngIf="!registrationFG.get('birthDate')?.errors?.['maxLength']"  >
+          maxLength: {{!registrationFG.get('birthDate')?.errors?.['maxLength']}}
+        </div>
       </div>
     </div>
     <div class="form-group row">

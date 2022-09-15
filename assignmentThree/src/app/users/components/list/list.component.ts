@@ -11,16 +11,25 @@ export class ListComponent implements OnInit {
   users: Users[];
   isLoading: boolean= false;
   userDetails: Users;
+  page: number=1;
+  perPage: number=3;
+  totalPage: number;
+  totalUserArr: number[]=[];
+  totalPageArr: number[]=[];
   constructor(private usersService: UserService) { }
 
   ngOnInit(): void {
-   this.getUsers();   
+   this.getUsers(this.page, this.perPage);   
   }
-  getUsers():any{
+  getUsers(page: number, perPage: number):any{
     this.isLoading=true;
-    this.usersService.getAll().subscribe(
+    this.usersService.getAll(page, perPage).subscribe(
       (res:any)=>{
         this.users=res.data;
+        this.page= res.page;
+        this.totalPage = res.total_pages;
+        this.totalUserArr = Array.from(new Array(res.total).keys(), (item)=>item+1)
+        this.totalPageArr = Array.from(new Array(this.totalPage).keys(), (item)=> item+1)
         this.isLoading=false
       },
       error=>{
@@ -28,7 +37,7 @@ export class ListComponent implements OnInit {
       }
     )
   }
-  deleteUSer(id: number):void{
+  deleteUser(id: number):void{
       this.usersService.delete(id).subscribe(
         res=>console.log('delted done'),
         error=> console.error(error)
@@ -45,6 +54,19 @@ export class ListComponent implements OnInit {
       } 
     )
     
+  }
+  getPrivous(): void{
+    this.getUsers(this.page - 1, this.perPage)
+  }
+  getNext(): void{
+    this.getUsers(this.page + 1, this.perPage)
+  }
+  goToPage(page: number): void{
+    this.getUsers(page, this.perPage)
+  }
+  getValue(event: any): void{
+    this.perPage=event.target.value;
+    this.getUsers(1, this.perPage)
   }
 
 }

@@ -1,1 +1,96 @@
-<button (click)="addNew({id:15, first_name:'Eman', last_name:'hassouna', email:'eman@gmail.com',avatar:'https://reqres.in/img/faces/8-image.jpg'})">Add</button>
+<div class="container">
+    <button class="btn btn-secondary" routerLink="/users/list">←</button><br />
+    <h4>Add New User:</h4>
+    <br />
+    <form [formGroup]="registrationFG">
+      <div class="form-group row">
+        <label for="idUser" class="col-sm-2 col-form-label">ID:</label>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            name="id"
+            class="form-control"
+            id="idUser"
+            formControlName="id"
+          />
+        </div>
+      </div>
+        <div class="form-group row">
+          <label for="firstname" class="col-sm-2 col-form-label"
+            >FirstName:</label
+          >
+          <div class="col-sm-3">
+            <input
+              type="text"
+              class="form-control"
+              id="firstname"
+              name="firstName"
+              formControlName="first_name"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lastname" class="col-sm-2 col-form-label">LastName:</label>
+          <div class="col-sm-3">
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              name="lastName"
+              formControlName="last_name"
+            />
+          </div>
+        </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+          <div
+            class="invalid"
+            *ngIf="
+              registrationFG.get('email').value &&
+              registrationFG.get('email').errors
+            "
+          >
+            please enter a correct email that include "@xxxxxx"
+          </div>
+          <div
+            class="invalid"
+            *ngIf="registrationFG.get('email').errors?.['emailC']"
+          >
+            please Write a correct email that include ".com"
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="avatar" class="col-sm-2 col-form-label">Avatar:</label>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            class="form-control"
+            id="avatar"
+            name="avatar"
+            formControlName="avatar"
+          />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="onsubmitForm()"
+        [disabled]="registrationFG.invalid"
+      >
+        Submit
+      </button>
+      <div class="alert alert-success" *ngIf="success">
+        Succeeded: User added, <a routerLink="/users/list">Go to users-list...</a>
+      </div>
+    </form>
+  </div>
+  

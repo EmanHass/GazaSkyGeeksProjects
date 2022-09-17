@@ -1,24 +1,32 @@
 .add-details{
     margin-bottom: 20px;
 }
-
-.pagination{
-    button{
-        padding: 0px 20px;
-        margin-right: 2px;
-        border: 1px solid rgb(109, 108, 108);
-        background-color: white;
+.table-footer{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .pagination{
+        button{
+            padding: 0px 20px;
+            margin-right: 2px;
+            border: none;
+            background-color: white;
+            font-weight: 500;
     }
     .selected{
-        background-color: #d3d0c6d9;
+        border-bottom: 2px solid #ffc107;
+        color: #ffc107;
     }
 }
 .compoBox {
     display: flex;
     align-items: center;
     select{
-        padding: 0px 20px;
         border: 1px solid #ffc107;
+        border-radius: 5px;
         margin: 0 20px;
+        width: 100px;
+        padding: 5px 10px;
     }
+}
 }

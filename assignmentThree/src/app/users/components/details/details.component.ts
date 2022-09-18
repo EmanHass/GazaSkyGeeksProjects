@@ -1,5 +1,5 @@
 import { UserService } from './../../users-service/user.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Users } from '../../model-interface/model';
 
 @Component({
@@ -8,12 +8,13 @@ import { Users } from '../../model-interface/model';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  userDetaile: Users;
+  userDetails: Users;
   constructor(private usersService:UserService) { }
 
   ngOnInit(): void {
+    // To Get user details based on Id and display it in html div
     this.usersService.getData().subscribe(
-      res=> this.userDetaile=res
+      res=> this.userDetails=res
     )
   }
 

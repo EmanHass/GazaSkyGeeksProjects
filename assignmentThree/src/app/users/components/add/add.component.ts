@@ -1,21 +1,26 @@
 import { Users } from './../../model-interface/model';
 import { UserService } from './../../users-service/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
-  
   registrationFG: FormGroup;
   success: boolean = false;
 
   constructor(private usersService: UserService) {
     this.initializationFG();
-    
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -35,7 +40,7 @@ export class AddComponent implements OnInit {
       const value = control.value;
 
       if (value && !value.includes('.com')) {
-        return { emailC: true };
+        return { emailCustom: true };
       }
       return null;
     };
@@ -46,10 +51,11 @@ export class AddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.usersService.add(this.registrationFG.value).subscribe(
-        res=> console.log(res),
-        error=> console.error(error)
-      )
-      this.success = true;
+        (res) => {
+          this.success = true;
+        },
+        (error) => console.error(error)
+      );
     }
   }
 }

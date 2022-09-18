@@ -1,7 +1,7 @@
 <div *ngIf="isLoading">
     <img width="50" src="../../../../assets/spinner.gif"/>
 </div>
-<div class="container" *ngIf="!isLoading">
+<div *ngIf="!isLoading">
     <div class="add-details">
       <button type="button" class="btn btn-info" routerLink="/users/add">+</button>
       <button type="button" class="btn btn-warning" (click)="deleteSelectedUsers()">Delete All Selected</button>
@@ -35,15 +35,15 @@
           </tr>
         </tbody>
       </table>
-      <div *ngIf="!isLoading && users?.length>0">
+      <div class="table-footer" *ngIf="!isLoading && users?.length>0">
         <div class="pagination">
-          <button (click)="getPrivous()" [disabled]="page ===1" [class.selected]="page === 1"><<</button>
+          <button (click)="getPrivous()" [disabled]="page ===1">< Previous</button>
           <button *ngFor="let pg of totalPageArr" [disabled]="page === pg" [class.selected]="page === pg" (click)="goToPage(pg)">{{pg}}</button>
-          <button (click)="getNext()" [disabled]="page === totalPage" [class.selected]="page === totalPage">>></button>
+          <button (click)="getNext()" [disabled]="page === totalPage">Next ></button>
         </div>
 
         <div class="compoBox">          
-        <h4>Per Page:</h4>
+        <h5>Users Per Page:</h5>
         <select (change)="getValue($event)">
           <option *ngFor="let userPerPage of totalUserArr" value="{{userPerPage}}" [selected]="userPerPage == perPage">{{userPerPage}}</option>
         </select>

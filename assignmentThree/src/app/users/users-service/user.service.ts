@@ -40,8 +40,8 @@ export class UserService {
     });
   }
 
-  update(id: number, user: Users): Observable<any> {
-    return this.http.put(`${this.apiLink}/${id}`, user, {
+  update(user: Users): Observable<Users> {
+    return this.http.put<Users>(`${this.apiLink}/${user.id}`, user, {
       headers: new HttpHeaders({
         'content-type': 'application/json',
       }),

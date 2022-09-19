@@ -2,15 +2,24 @@
     <img width="50" src="../../../../assets/spinner.gif"/>
 </div>
 <div *ngIf="!isLoading">
-    <div class="add-details">
-      <button type="button" class="btn btn-info" routerLink="/users/add">+</button>
-      <button type="button" class="btn btn-warning" (click)="deleteSelectedUsers()">Delete All Selected</button>
-    </div>
+<div class="section">
+  <div class="add-delete">
+    <button type="button" class="btn btn-info" routerLink="/users/add">+</button>
+    <button type="button" class="btn btn-warning" (click)="deleteSelectedUsers()">Delete All Selected</button>
+  </div>
+  
+  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isDelete">
+    <strong>{{msgDelete}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
     <div class="table-responsive-sm">
       <table class="table table-striped table-hover ">
         <thead class="thead-dark">
           <tr>
-            <th></th>
+            <th><input type="checkbox" (click)="toggleCheckAll($event)"/></th>
             <th>Image</th>
             <th>Id</th>
             <th>Name</th>
@@ -48,13 +57,6 @@
           <option *ngFor="let userPerPage of totalUserArr" value="{{userPerPage}}" [selected]="userPerPage == perPage">{{userPerPage}}</option>
         </select>
         </div>
-      </div>
-
-      <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isDelete">
-        <strong>{{msgDelete}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
     </div>
   </div>

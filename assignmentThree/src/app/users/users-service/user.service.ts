@@ -40,8 +40,8 @@ export class UserService {
     });
   }
 
-  update(id: number, user: Users): Observable<any> {
-    return this.http.put(`${this.apiLink}/${id}`, user, {
+  update(user: Users): Observable<Users> {
+    return this.http.put<Users>(`${this.apiLink}/${user.id}`, user, {
       headers: new HttpHeaders({
         'content-type': 'application/json',
       }),
@@ -51,9 +51,9 @@ export class UserService {
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiLink}/${id}`);
   }
-
-  sendData(value: any): void {
-    this.subjectData.next(value);
+  // Methods to set and get user details and display it in details Component
+  sendData(user: Users): void {
+    this.subjectData.next(user);
   }
 
   getData(): Observable<any> {

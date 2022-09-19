@@ -56,7 +56,7 @@ export class EditComponent implements OnInit, OnDestroy {
   onUpdate(): void {
     if (this.registrationFG.valid) {
       this.usersService
-        .update(Number(this.id), this.registrationFG.value)
+        .update(this.registrationFG.value)
         .subscribe(
           (res) => {
             this.success = true;

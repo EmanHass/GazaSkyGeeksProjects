@@ -1,5 +1,9 @@
-.add-details{
-    margin-bottom: 20px;
+.section{
+    display: flex;
+    justify-content: space-between;
+    .add-delete{
+        margin-bottom: 20px;
+    }
 }
 .table-footer{
     display: flex;

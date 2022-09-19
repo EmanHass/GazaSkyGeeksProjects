@@ -85,7 +85,10 @@ export class ListComponent implements OnInit {
     this.perPage = event.target.value;
     this.getUsers(1, this.perPage);
   }
-
+  // To make all user in table checked
+  toggleCheckAll(event: any): void{
+    this.userChecked=Array.from(new Array(this.users.length).keys(),(item)=>event.target.checked)
+  }
   // to get the value of the checked user
   toggleCheck(event: any, index: number): void {
     this.userChecked[index] = event.target.checked;

@@ -1,6 +1,6 @@
 
 
-export interface Statics{ 
+export interface Static{ 
     id: number,
     count: number,
     name: string,

@@ -2,17 +2,17 @@ import { Experience } from './experience.model';
 import { Address } from './address.model';
 import { Contact } from "./contact.model";
 import { Education } from './education.model';
-import { Users } from "./users.model";
-import { Skills } from './skills.model';
-import { Languages } from './Languages.model';
+import { User } from "./user.model";
+import { Skill } from './skill.model';
+import { Language } from './language.model';
 
 
-export interface Jobseekers{
-    user: Users,
+export interface Jobseeker{
+    user: User,
     contact: Contact,
     address: Address,
     educations: Education[],
     experiences:Experience[],
-    skills: Skills[],
-    languages: Languages[]
+    skills: Skill[],
+    languages: Language[]
 }

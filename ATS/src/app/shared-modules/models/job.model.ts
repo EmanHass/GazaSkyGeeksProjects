@@ -7,17 +7,16 @@ export interface Job{
     sectorId: number,
     functionalAreaId: number,
     countryId: number,
-    region: string,
     cityId: number, 
     yeasOfExperience: Range,
-    expectedSalary : RadioNodeList,
+    expectedSalary : Range,
     jobTypeId: number,
     lowEducationLevelId: number,
     highEducationLevelId: number,
     nationalityId: number,
-    languagesId:[],
-    skillsId:[],
+    languageIds:number[],
+    skillIds:number[],
     description: string,
     requirements: string,
-    benefitsID: [] 
+    benefitIds: number[] 
 }

@@ -5,13 +5,13 @@ export interface JobApplication{
         jobId: number,
         jobseekerId: number,
         statusId: number,
-        createdTime: number,
-        updatedTime: number
+        createdTime: Date,
+        updatedTime: Date
     },
     statusHistories:{
         id: number,
         statusId: number,
         userId: number,
-        createdTime: number,
+        createdTime: Date
     }
 }

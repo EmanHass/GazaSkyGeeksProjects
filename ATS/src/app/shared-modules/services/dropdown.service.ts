@@ -11,22 +11,7 @@ export class DropdownService{
   constructor() { }
 
   getAll(): Observable<any>{
-    let dropdowns={
-      countries:{},
-      cities:{},
-      sectors:{},
-      functionalAreas:{},
-      languages:{},
-      benefits:{},
-      jobType:{},
-      nationality:{},
-      educationLevel:{},
-      skills:{},
-      levelForLanguagesOrSkills:{},
-      status:{},
-      majors:{},
-      universities:{}
-      };
+    let dropdowns: any={};
       dropdowns['countries']=[
         {id:1, name: 'Palestine'},
         {id:2, name: 'Jordan'}
@@ -83,9 +68,9 @@ export class DropdownService{
       ];
 
       dropdowns['levelForLanguagesOrSkills']=[
-        {id:1, name: 'Arabic', level:'advanced'},
-        {id:2, name: 'English', level:'intermediate'},
-        {id:3, name: 'TypeScript', level:'beginner'}
+        {id:1, name: 'advanced'},
+        {id:2, name: 'intermediate'},
+        {id:3, name: 'beginner'}
       ];
 
       dropdowns['status']=[
@@ -99,9 +84,9 @@ export class DropdownService{
       ];
 
       dropdowns['universities']=[
-        {id:1, name: 'Al-Azhar University', cityId:1},
-        {id:2, name: 'Al-Islamic University', cityId:1},
-        {id:3, name: 'Batra', cityId:4}
+        {id:1, name: 'Al-Azhar University', parentId:1},
+        {id:2, name: 'Al-Islamic University', parentId:1},
+        {id:3, name: 'Batra', parentId:4}
       ];
     return of(dropdowns)
   }
@@ -117,8 +102,17 @@ export class DropdownService{
   getCountries(): Dropdown[]{
     return this.getDropdown() && this.getDropdown().countries;
   }
-  getCities(): DropdownParent[]{
-    return this.getDropdown() && this.getDropdown().cities;
+  getCities(id:number, all:boolean=false): DropdownParent[]{
+    if(all){
+      return this.getDropdown()?.cities
+    }
+    if(this.getDropdown()?.cities ){
+      return this.getDropdown().cities.filter((val:any)=>{
+      return val.parentId == id
+    })     
+    }
+    return null;
+
   }
   getSectors(): Dropdown[]{
     return this.getDropdown() && this.getDropdown().sectors;
@@ -137,7 +131,8 @@ export class DropdownService{
   }
   getNationality(): Dropdown[]{
     return this.getDropdown() && this.getDropdown().nationality;
-  }getEducationLevel(): Dropdown[]{
+  }
+  getEducationLevel(): Dropdown[]{
     return this.getDropdown() && this.getDropdown().educationLevel;
   }
   getSkills(): Dropdown[]{
@@ -152,7 +147,15 @@ export class DropdownService{
   getMajors(): Dropdown[]{
     return this.getDropdown() && this.getDropdown().majors;
   }
-  getUniversities(): DropdownParent[]{
-    return this.getDropdown() && this.getDropdown().universities;
+  getUniversities(id:number, all:boolean=false): DropdownParent[]{
+    if(all){
+      return this.getDropdown()?.universities
+    }
+    if(this.getDropdown()?.universities ){
+      return this.getDropdown().universities.filter((val:any)=>{
+      return val.parentId == id
+    })     
+    }
+    return null;
   }
 }

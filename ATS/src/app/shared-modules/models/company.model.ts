@@ -1,7 +1,7 @@
 import { Address } from "./address.model"
 import { Contact } from "./contact.model"
 import { Job } from "./job.model"
-import { Users } from "./users.model"
+import { User } from "./user.model"
 
 export interface Company{
     info:{
@@ -10,8 +10,8 @@ export interface Company{
         logoImage: string,
         coverImage: string
     },
-    ownerUser: Users,
-    users: Users[],
+    ownerUser: User,
+    users: User[],
     contact: Contact,
     address: Address,
     jobs: Job[]

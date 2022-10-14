@@ -1,0 +1,1 @@
+export enum InterviewType {ONLINE,OFFLINE}

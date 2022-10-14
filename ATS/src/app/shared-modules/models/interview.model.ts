@@ -1,5 +1,6 @@
+import { InterviewType } from './enums/interview-type.enum';
 import { Time } from "@angular/common";
-import { Users } from "./users.model";
+import { User } from "./user.model";
 
 
 export interface Interview{
@@ -8,7 +9,7 @@ export interface Interview{
     date: Date,
     time: Time,
     duration: number,
-    interviewType: string,
+    interviewType: InterviewType,
     interviewDetails: string,
-    interviewers: Users[]
+    interviewers: User[]
 }

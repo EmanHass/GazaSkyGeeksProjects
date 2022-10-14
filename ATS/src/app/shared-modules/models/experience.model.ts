@@ -4,8 +4,8 @@ export interface Experience{
     company: string,
     countryId: number,
     cityId: number,
-    startDate: number,
-    endDate: number,
+    startDate: Date,
+    endDate: Date,
     presentStatus:string,
     salary: number
 }

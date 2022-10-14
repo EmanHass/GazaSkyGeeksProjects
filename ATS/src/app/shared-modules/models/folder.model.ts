@@ -1,6 +1,6 @@
 
 
-export interface Folders{
+export interface Folder{
     id: number,
     name: string,
 }

@@ -1,4 +1,4 @@
-<app-education-add [formData]="formData" (onUpdate)="onFormUpdate($event)" *ngIf="showAddFormStatus"></app-education-add>
+<app-education-add [formData]="formData" (onUpdate)="onFormUpdate()" *ngIf="showAddFormStatus"></app-education-add>
 <div class="row">
     <div class="col-12">
       <div class="card">
@@ -36,8 +36,8 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody *ngIf="educations && educations.length > 0">
-              <tr *ngFor="let item of educations; let i = index">
+            <tbody *ngIf="data && data.length > 0">
+              <tr *ngFor="let item of data; let i = index">
                 <td>{{ item.id }}</td>
                 <td>{{ item.majorId }}</td>
                 <td>{{ item.countryId }}</td>
@@ -47,7 +47,7 @@
                 <td>{{ item.endDate }}</td>
                 <td>{{ item.presentStatus }}</td>
                 <td>
-                  <button class="btn btn-xs" >
+                  <button class="btn btn-xs" (click)="onEdit(item.id)">
                       <i class="fas fa-edit"></i>
                   </button>
                   <button class="btn btn-xs" (click)="remove(item.id)">

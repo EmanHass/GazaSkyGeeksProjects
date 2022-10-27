@@ -86,7 +86,10 @@ export class DropdownService{
       dropdowns['universities']=[
         {id:1, name: 'Al-Azhar University', parentId:1},
         {id:2, name: 'Al-Islamic University', parentId:1},
-        {id:3, name: 'Batra', parentId:4}
+        {id:3 , name: 'Al-Najah University', parentId:2},
+        {id:4 , name: 'Birzeit University', parentId:3},
+        {id:5, name: 'Batra', parentId:4},
+        {id:6, name: 'Irbid University', parentId:5},
       ];
     return of(dropdowns)
   }

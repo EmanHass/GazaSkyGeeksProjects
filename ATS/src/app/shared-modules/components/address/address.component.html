@@ -1,38 +1,43 @@
-<form class="form-horizontal">
+<form class="form-horizontal" [formGroup]="registrationFG">
+  <div *ngIf="registrationFG.touched && !registrationFG.valid" class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-ban"></i> Validation!</h5>
+     Please Fill the correct Data
+  </div>
     <div class="form-group row">
-      <label for="inputName" class="col-sm-2 col-form-label">Title</label>
+      <label for="inputCountry" class="col-sm-2 col-form-label">Country<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputName" placeholder="Name">
+        <input type="text" class="form-control" id="inputCountry" placeholder="Country" [class.error]="registrationFG.get('country').touched && registrationFG.get('country').errors != null" formControlName="country">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputEmail" class="col-sm-2 col-form-label">Country</label>
+      <label for="inputregion" class="col-sm-2 col-form-label">Region<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        <input type="text" class="form-control" id="inputregion" placeholder="region" [class.error]="registrationFG.get('region').touched && registrationFG.get('region').errors != null" formControlName="region">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputName2" class="col-sm-2 col-form-label">City</label>
+      <label for="inputCity" class="col-sm-2 col-form-label">City<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputName2" placeholder="Name">
+        <input type="text" class="form-control" id="inputCity" placeholder="City" [class.error]="registrationFG.get('city').touched && registrationFG.get('city').errors != null" formControlName="city">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputExperience" class="col-sm-2 col-form-label">Street</label>
+      <label for="inputStreet" class="col-sm-2 col-form-label">Street<span class="required">*</span></label>
       <div class="col-sm-10">
-        <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+        <input type="text" class="form-control" id="inputStreet" placeholder="Street" [class.error]="registrationFG.get('street').touched && registrationFG.get('street').errors != null" formControlName="street"/>
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputSkills" class="col-sm-2 col-form-label">Building Number</label>
+      <label for="inputBuildingNumber" class="col-sm-2 col-form-label">Building Number<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+        <input type="text" class="form-control" id="inputBuildingNumber" placeholder="Building Number" [class.error]="registrationFG.get('buildingNumber').touched && registrationFG.get('buildingNumber').errors != null" formControlName="buildingNumber">
       </div>
     </div>
     
     <div class="form-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-danger">Submit</button>
+        <button type="submit" class="btn btn-danger" (click)="onUpdateAddress()">Update</button>
       </div>
     </div>
   </form>

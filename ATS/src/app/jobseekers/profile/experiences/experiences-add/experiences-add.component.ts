@@ -1,5 +1,6 @@
+import { Experience } from './../../../../shared-modules/models/experience.model';
 import { ExperienceServiceService } from './../../../services/experience-service.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ExperiencesAddComponent implements OnInit {
 
   @Input() formData: any;
-  
+  @Output() onUpdate : EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
   registrationFG: FormGroup;
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class ExperiencesAddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.experienceService.addExperience(this.registrationFG.value);
+      this.onUpdate.emit(this.registrationFG.value)
     }
   }
 

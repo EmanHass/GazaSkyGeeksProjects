@@ -1,33 +1,44 @@
-<form class="form-horizontal">
+<form class="form-horizontal" [formGroup]="registrationFG">
+    <div *ngIf="registrationFG.touched && !registrationFG.valid" class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-ban"></i> Validation!</h5>
+       Invalid data
+    </div>
     <div class="form-group row">
-      <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+      <label for="inputId" class="col-sm-2 col-form-label">Id<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputName" placeholder="Name">
+        <input type="number" class="form-control" [class.error]="registrationFG.get('id').touched && registrationFG.get('id').errors != null" id="inputId" placeholder="Id" formControlName="id">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+      <label for="inputEmail" class="col-sm-2 col-form-label">Email<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        <input type="email" class="form-control" [class.error]="registrationFG.get('email').touched && registrationFG.get('email').errors != null" id="inputEmail" placeholder="Email" formControlName="email">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputName2" class="col-sm-2 col-form-label">Mobile</label>
+      <label for="inputPhone" class="col-sm-2 col-form-label">Phone<span class="required">*</span></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputName2" placeholder="Name">
+        <input type="text" class="form-control" [class.error]="registrationFG.get('phone').touched && registrationFG.get('phone').errors != null" id="inputPhone" placeholder="Phone" formControlName="phone">
       </div>
     </div>
     <div class="form-group row">
-        <label for="inputName2" class="col-sm-2 col-form-label">Fax</label>
+      <label for="inputmobile" class="col-sm-2 col-form-label">Mobile<span class="required">*</span></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [class.error]="registrationFG.get('mobile').touched&& registrationFG.get('mobile').errors != null" id="inputmobile" placeholder="Mobile" formControlName="mobile">
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputFax" class="col-sm-2 col-form-label">Fax<span class="required">*</span></label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputName2" placeholder="Name">
+          <input type="text" class="form-control" [class.error]="registrationFG.get('fax').touched && registrationFG.get('fax').errors != null" id="inputFax" placeholder="Fax" formControlName="fax">
         </div>
       </div>
     
     
     <div class="form-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-danger">Submit</button>
+        <button type="submit" class="btn btn-danger" (click)="onUpdateContact()">Update</button>
       </div>
     </div>
   </form>

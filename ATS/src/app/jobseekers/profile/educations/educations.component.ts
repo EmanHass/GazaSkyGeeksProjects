@@ -1,6 +1,6 @@
 import { Education } from './../../../shared-modules/models/education.model';
 import { EducationServiceService } from './../../services/education-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-educations',
@@ -10,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class EducationsComponent implements OnInit {
 
   showAddFormStatus: boolean = false;
-  educations: Education[] = [];
-  formData: any;
+  @Input() data: Education[] = [];
+  @Output() onUpdate: EventEmitter<Education[] | Education> = new EventEmitter<Education[] | Education>();
+
+  formData: Education=null;
   formType: number = 1;
   constructor(private educationService: EducationServiceService) { }
 
@@ -19,34 +21,37 @@ export class EducationsComponent implements OnInit {
     this.displayEducations();
   }
   displayEducations():void{
-    this.educations=this.educationService.getEducations();
-  }
-  remove(id:number):void{
-    this.educations=this.educationService.removeEducation(id);    
+    this.data= this.educationService.getEducations();
   }
 
   toggleAddForm(): void {
     this.formType = 1;
     this.formData = null;
     this.showAddFormStatus = !this.showAddFormStatus;
-    // this.onUpdate.emit(this.educations);
   }
 
-  onFormUpdate(formData: any){
+  onFormUpdate(){
     if(this.formType === 1){
       //add
+      this.onUpdate.emit(this.data);
     }else{
       //edit
+      this.onUpdate.emit(this.formData);
     }
-    //set new instance from formdata
-    //push new instance into educations array
-    //emit this educations array
   }
 
 
-  onEditData(index: number): void {
+  onEdit(id: number): void {
+    this.showAddFormStatus = false;
     this.formType = 2;
-    this.formData = this.educations[index];
+    setTimeout(()=>{
+      this.showAddFormStatus = true;
+      this.formData= this.educationService.getById(id);
+    },500)
+  }
+  remove(id:number):void{
+    this.data=this.educationService.removeEducation(id);
+    this.onUpdate.emit(this.data)    
   }
 
 }

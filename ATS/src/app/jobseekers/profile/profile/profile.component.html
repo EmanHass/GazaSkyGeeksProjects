@@ -46,7 +46,7 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Save All</b></a>
+              <a class="btn btn-primary btn-block" (click)="onSaveAll()"><b>Save All</b></a>
             </div>
             <!-- /.card-body -->
           </div>
@@ -73,11 +73,11 @@
                 </div>
 
                 <div class="tab-pane" id="contact">
-                    <app-contact></app-contact>
+                    <app-contact [data]="contact" (onUpdate)="onProfileUpdate($event, 'contact')"></app-contact>
                 </div>
 
                 <div class="tab-pane" id="educations">
-                    <app-educations></app-educations>
+                    <app-educations [data]="educations" (onUpdate)="onProfileUpdate($event,'education')"></app-educations>
                 </div>
 
                 <div class="tab-pane" id="experiences">

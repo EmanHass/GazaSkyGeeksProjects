@@ -1,5 +1,8 @@
+import { DropdownService } from './../../../../shared-modules/services/dropdown.service';
+import { Dropdown } from './../../../../shared-modules/models/dropdown-models/dropdown.model';
+import { Education } from './../../../../shared-modules/models/education.model';
 import { EducationServiceService } from './../../../services/education-service.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,20 +12,27 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class EducationAddComponent implements OnInit {
 
-  @Input() formData: any;
-  
+  @Input() formData: Education;
+  @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
+  countryList: Dropdown[]=[];
+  cityList: Dropdown[]=[];
+  universityList: Dropdown[];
+  majorList: Dropdown[];
   registrationFG: FormGroup;
 
+  constructor(private educationService: EducationServiceService,private dropdownService:DropdownService) {
+    this.initializationFG();    
+  }
+
   ngOnInit(): void {
+    this.countryList=this.dropdownService.getCountries();
+    this.majorList = this.dropdownService.getMajors();
+
     if(this.formData){
-      //edit
+      this.registrationFG.setValue(this.formData)
     }else{
       //add
     }
-  }
-
-  constructor(private educationService: EducationServiceService) {
-    this.initializationFG();    
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -40,6 +50,19 @@ export class EducationAddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.educationService.addEducation(this.registrationFG.value);
+      this.onUpdate.emit(this.registrationFG.value)
     }
+  }
+  onItemSelect(event: any, type: string){
+    if(type == 'conutry'){
+      this.cityList=this.dropdownService.getCities(event.id)        
+    }else if(type == 'city'){
+      this.universityList= this.dropdownService.getUniversities(event.id)
+    }else if(type == 'university'){
+
+    }else if(type == 'major'){
+      
+    }
+
   }
 }

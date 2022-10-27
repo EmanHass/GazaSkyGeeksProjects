@@ -1,6 +1,6 @@
 import { ExperienceServiceService } from './../../services/experience-service.service';
 import { Experience } from './../../../shared-modules/models/experience.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-experiences',
@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class ExperiencesComponent implements OnInit {
 
   showAddFormStatus: boolean = false;
-  experiences: Experience[] = [];
+  @Input() experiences: Experience[] = [];
+  @Output() onUpdate: EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
   formData: any;
   formType: number = 1;
   constructor(private experienceService: ExperienceServiceService) { }
@@ -22,19 +23,20 @@ export class ExperiencesComponent implements OnInit {
     this.experiences=this.experienceService.getExperience();
   }
   remove(id:number):void{
-    this.experiences=this.experienceService.removeExperience(id);    
+    this.experiences=this.experienceService.removeExperience(id);
+    this.onUpdate.emit(this.experiences);    
   }
 
   toggleAddForm(): void {
     this.formType = 1;
     this.formData = null;
     this.showAddFormStatus = !this.showAddFormStatus;
-    // this.onUpdate.emit(this.educations);
   }
 
   onFormUpdate(formData: any){
     if(this.formType === 1){
       //add
+      this.onUpdate.emit(this.experiences);
     }else{
       //edit
     }

@@ -1,9 +1,7 @@
 import { Experience } from './../../shared-modules/models/experience.model';
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ExperienceServiceService {
   experiences: Experience[]=[
     {id:1, position:'manager',company:'GSG', countryId:1, cityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'yes', salary:5000},

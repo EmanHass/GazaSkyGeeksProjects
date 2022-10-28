@@ -45,7 +45,7 @@
                 <td>{{ item.universityId }}</td>
                 <td>{{ item.startDate }}</td>
                 <td>{{ item.endDate }}</td>
-                <td>{{ item.presentStatus }}</td>
+                <td>{{ item.presentStatus? 'Yes': 'No' }}</td>
                 <td>
                   <button class="btn btn-xs" (click)="onEdit(item.id)">
                       <i class="fas fa-edit"></i>

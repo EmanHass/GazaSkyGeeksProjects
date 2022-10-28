@@ -36,10 +36,9 @@ export class EducationsComponent implements OnInit {
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.onUpdate.emit(this.formData);
+      this.onUpdate.emit(this.educationService.getEducations());
     }
   }
-
 
   onEdit(id: number): void {
     this.showAddFormStatus = false;
@@ -47,6 +46,8 @@ export class EducationsComponent implements OnInit {
     setTimeout(()=>{
       this.showAddFormStatus = true;
       this.formData= this.educationService.getById(id);
+      console.log('formdata',this.formData);
+      
     },500)
   }
   remove(id:number):void{

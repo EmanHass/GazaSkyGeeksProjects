@@ -8,7 +8,7 @@ import { Language } from './language.model';
 
 
 export interface Jobseeker{
-    // user: User,
+    user: User,
     contact: Contact,
     address: Address,
     educations: Education[],

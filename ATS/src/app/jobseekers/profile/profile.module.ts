@@ -10,6 +10,7 @@ import { EducationsComponent } from './educations/educations.component';
 import { EducationAddComponent } from './educations/education-add/education-add.component';
 import { ExperiencesAddComponent } from './experiences/experiences-add/experiences-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EducationsComponent,
     EducationAddComponent,
     ExperiencesAddComponent,
+    UserInfoComponent,
   ],
   imports: [
     CommonModule,

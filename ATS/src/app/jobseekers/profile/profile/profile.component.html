@@ -59,7 +59,8 @@
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#address" data-toggle="tab">Address</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#user" data-toggle="tab">User</a></li>
+                <li class="nav-item"><a class="nav-link" href="#address" data-toggle="tab">Address</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact" data-toggle="tab">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="#educations" data-toggle="tab">Educations</a></li>
                 <li class="nav-item"><a class="nav-link" href="#experiences" data-toggle="tab">Experiences</a></li>
@@ -67,8 +68,13 @@
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content">
-                
-                <div class="active tab-pane" id="address">
+
+                <div class="active tab-pane" id="user">
+                  <h1>Users</h1>
+                  <app-user-info [data]="user" (onUpdate)="onProfileUpdate($event, 'user')"></app-user-info>
+                </div>
+
+                <div class="tab-pane" id="address">
                   <app-address [data]="address" (onUpdate)="onProfileUpdate($event, 'address')"></app-address>
                 </div>
 

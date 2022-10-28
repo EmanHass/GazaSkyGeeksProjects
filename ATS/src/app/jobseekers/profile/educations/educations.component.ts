@@ -11,7 +11,7 @@ export class EducationsComponent implements OnInit {
 
   showAddFormStatus: boolean = false;
   @Input() data: Education[] = [];
-  @Output() onUpdate: EventEmitter<Education[] | Education> = new EventEmitter<Education[] | Education>();
+  @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
 
   formData: Education=null;
   formType: number = 1;
@@ -36,7 +36,8 @@ export class EducationsComponent implements OnInit {
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.onUpdate.emit(this.educationService.getEducations());
+      this.displayEducations();
+      this.onUpdate.emit(this.data);
     }
   }
 

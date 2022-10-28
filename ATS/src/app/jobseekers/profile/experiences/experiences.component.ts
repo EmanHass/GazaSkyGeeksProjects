@@ -10,21 +10,21 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class ExperiencesComponent implements OnInit {
 
   showAddFormStatus: boolean = false;
-  @Input() experiences: Experience[] = [];
+  @Input() data: Experience[] = [];
   @Output() onUpdate: EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
-  formData: any;
+  formData: Experience;
   formType: number = 1;
   constructor(private experienceService: ExperienceServiceService) { }
 
   ngOnInit(): void {
-    this.displayEducations();
+    this.displayExperience();
   }
-  displayEducations():void{
-    this.experiences=this.experienceService.getExperience();
+  displayExperience():void{
+    this.data=this.experienceService.getExperience();
   }
   remove(id:number):void{
-    this.experiences=this.experienceService.removeExperience(id);
-    this.onUpdate.emit(this.experiences);    
+    this.data=this.experienceService.removeExperience(id);
+    this.onUpdate.emit(this.data);    
   }
 
   toggleAddForm(): void {
@@ -33,22 +33,23 @@ export class ExperiencesComponent implements OnInit {
     this.showAddFormStatus = !this.showAddFormStatus;
   }
 
-  onFormUpdate(formData: any){
+  onFormUpdate(){
     if(this.formType === 1){
       //add
-      this.onUpdate.emit(this.experiences);
+      this.onUpdate.emit(this.data);
     }else{
       //edit
+      this.displayExperience();
+      this.onUpdate.emit(this.data);
     }
-    //set new instance from formdata
-    //push new instance into educations array
-    //emit this educations array
   }
-
-
-  onEditData(index: number): void {
+  onEdit(id: number): void {
+    this.showAddFormStatus = false;
     this.formType = 2;
-    this.formData = this.experiences[index];
+    setTimeout(()=>{
+      this.showAddFormStatus = true;
+      this.formData= this.experienceService.getById(id);
+      console.log('formdata',this.formData);    
+    },500)
   }
-
 }

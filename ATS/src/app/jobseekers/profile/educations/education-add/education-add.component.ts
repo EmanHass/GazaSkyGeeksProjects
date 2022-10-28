@@ -71,7 +71,7 @@ export class EducationAddComponent implements OnInit {
   onEditForm():void{
     if(this.registrationFG.valid){
       this.educationService.updateEducation(this.formData.id, this.registrationFG.value);
-      this.onUpdate.emit(this.educationService.eductions);   
+      this.onUpdate.emit(this.educationService.getEducations());   
     }else{
       this.registrationFG.markAllAsTouched()
     }

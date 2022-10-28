@@ -14,6 +14,9 @@ export class ExperienceServiceService {
   getExperience(): Experience[]{
     return this.experiences;
   }
+  getById(id:number): Experience{
+    return this.experiences.find(val => val.id === id);
+  }
   addExperience(values: Experience): void {
     this.experiences.push(values);
   }

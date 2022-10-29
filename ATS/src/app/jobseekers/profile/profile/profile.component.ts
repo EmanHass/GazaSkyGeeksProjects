@@ -1,3 +1,5 @@
+import { LanguageService } from './../../services/language.service';
+import { SkillService } from './../../services/skill.service';
 import { UserService } from './../../services/user.service';
 import { ContactService } from './../../services/contact.service';
 import { ExperienceServiceService } from './../../services/experience-service.service';
@@ -34,7 +36,9 @@ export class ProfileComponent implements OnInit {
      private experienceService:ExperienceServiceService,
      private contactService:ContactService,
      private addressService: AddressService,
-     private userService: UserService
+     private userService: UserService,
+     private skillService:SkillService,
+     private languageService:LanguageService
     ) { }
 
   ngOnInit(): void {
@@ -62,7 +66,9 @@ export class ProfileComponent implements OnInit {
       experiences: this.experienceService.getExperience(),
       contact: this.contactService.getContact(),
       address: this.addressService.getAddress(),
-      user: this.userService.getUser()
+      user: this.userService.getUser(),
+      skills:this.skillService.getSkills(),
+      languages:this.languageService.getLanguages()
     }
     console.log('jobseeker',this.jobseeker);
     

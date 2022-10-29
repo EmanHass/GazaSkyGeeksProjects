@@ -11,6 +11,10 @@ import { EducationAddComponent } from './educations/education-add/education-add.
 import { ExperiencesAddComponent } from './experiences/experiences-add/experiences-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { SkillsComponent } from './skills/skills.component';
+import { LanguagesComponent } from './languages/languages.component';
+import { SkillAddComponent } from './skills/skill-add/skill-add.component';
+import { LanguageAddComponent } from './languages/language-add/language-add.component';
 
 
 @NgModule({
@@ -22,6 +26,10 @@ import { UserInfoComponent } from './user-info/user-info.component';
     EducationAddComponent,
     ExperiencesAddComponent,
     UserInfoComponent,
+    SkillsComponent,
+    LanguagesComponent,
+    SkillAddComponent,
+    LanguageAddComponent,
   ],
   imports: [
     CommonModule,

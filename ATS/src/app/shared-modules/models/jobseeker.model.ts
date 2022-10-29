@@ -13,6 +13,6 @@ export interface Jobseeker{
     address: Address,
     educations: Education[],
     experiences:Experience[],
-    // skills: Skill[],
-    // languages: Language[]
+    skills: Skill[],
+    languages: Language[]
 }

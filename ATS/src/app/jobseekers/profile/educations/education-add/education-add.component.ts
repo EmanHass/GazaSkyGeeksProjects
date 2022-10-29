@@ -15,6 +15,7 @@ export class EducationAddComponent implements OnInit {
   @Input() formData: Education;
   @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
   isEdit: boolean = false;
+  showStatus: boolean = true;
   countryList: Dropdown[]=[];
   cityList: Dropdown[]=[];
   universityList: Dropdown[];
@@ -63,7 +64,8 @@ export class EducationAddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.educationService.addEducation(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value)
+      this.onUpdate.emit(this.registrationFG.value);
+      this.showStatus=false
     }else{
       this.registrationFG.markAllAsTouched()
     }
@@ -71,7 +73,8 @@ export class EducationAddComponent implements OnInit {
   onEditForm():void{
     if(this.registrationFG.valid){
       this.educationService.updateEducation(this.formData.id, this.registrationFG.value);
-      this.onUpdate.emit(this.educationService.getEducations());   
+      this.onUpdate.emit(this.educationService.getEducations()); 
+      this.showStatus=false  
     }else{
       this.registrationFG.markAllAsTouched()
     }

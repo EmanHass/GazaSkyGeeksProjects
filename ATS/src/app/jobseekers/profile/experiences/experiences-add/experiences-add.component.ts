@@ -16,6 +16,7 @@ export class ExperiencesAddComponent implements OnInit {
   @Output() onUpdate : EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
   registrationFG: FormGroup;
   isEdit: boolean = false;
+  showStatus: boolean = true;
   countryList: Dropdown[]=[];
   cityList: Dropdown[]=[];
   selectedCountryId: number;
@@ -53,14 +54,18 @@ export class ExperiencesAddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.experienceService.addExperience(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value)
+      this.onUpdate.emit(this.registrationFG.value);
+      this.showStatus=false
+    }else{
+      this.registrationFG.markAllAsTouched()
     }
   }
 
   onEditForm():void{
     if(this.registrationFG.valid){
       this.experienceService.updateExperience(this.formData.id, this.registrationFG.value);
-      this.onUpdate.emit(this.experienceService.getExperience());   
+      this.onUpdate.emit(this.experienceService.getExperience());
+      this.showStatus=false   
     }else{
       this.registrationFG.markAllAsTouched()
     }

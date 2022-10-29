@@ -64,13 +64,14 @@
                 <li class="nav-item"><a class="nav-link" href="#contact" data-toggle="tab">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="#educations" data-toggle="tab">Educations</a></li>
                 <li class="nav-item"><a class="nav-link" href="#experiences" data-toggle="tab">Experiences</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills" data-toggle="tab">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#language" data-toggle="tab">Languages</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content">
 
                 <div class="active tab-pane" id="user">
-                  <h1>Users</h1>
                   <app-user-info [data]="user" (onUpdate)="onProfileUpdate($event, 'user')"></app-user-info>
                 </div>
 
@@ -83,11 +84,19 @@
                 </div>
 
                 <div class="tab-pane" id="educations">
-                    <app-educations [data]="educations" (onUpdate)="onProfileUpdate($event,'education')"></app-educations>
+                    <app-educations  [data]="educations" (onUpdate)="onProfileUpdate($event,'education')"></app-educations>
                 </div>
 
                 <div class="tab-pane" id="experiences">
                     <app-experiences></app-experiences>
+                </div>
+
+                <div class="tab-pane" id="skills">
+                  <app-skills></app-skills>
+                </div>
+
+                <div class="tab-pane" id="language">
+                  <app-languages></app-languages>
                 </div>
                 <!-- /.tab-pane -->
               </div>

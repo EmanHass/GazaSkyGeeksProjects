@@ -2,6 +2,6 @@
 
 export interface Language{
     id: number,
-    level: string,
+    level: number,
     native: boolean
 }

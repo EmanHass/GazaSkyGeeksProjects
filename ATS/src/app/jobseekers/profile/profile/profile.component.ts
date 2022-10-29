@@ -1,3 +1,6 @@
+import { LanguageService } from './../../services/language.service';
+import { SkillService } from './../../services/skill.service';
+import { UserService } from './../../services/user.service';
 import { ContactService } from './../../services/contact.service';
 import { ExperienceServiceService } from './../../services/experience-service.service';
 import { EducationServiceService } from './../../services/education-service.service';
@@ -10,6 +13,7 @@ import { Jobseeker } from './../../../shared-modules/models/jobseeker.model';
 import { Component, OnInit } from '@angular/core';
 import { Skill } from 'src/app/shared-modules/models/skill.model';
 import { AddressService } from '../../services/address.service';
+import { User } from 'src/app/shared-modules/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +23,7 @@ import { AddressService } from '../../services/address.service';
 export class ProfileComponent implements OnInit {
 
   jobseeker: Jobseeker;
+  user:User;
   address: Address; 
   contact : Contact;
   educations: Education[];
@@ -30,7 +35,10 @@ export class ProfileComponent implements OnInit {
      private educationService:EducationServiceService,
      private experienceService:ExperienceServiceService,
      private contactService:ContactService,
-     private addressService: AddressService
+     private addressService: AddressService,
+     private userService: UserService,
+     private skillService:SkillService,
+     private languageService:LanguageService
     ) { }
 
   ngOnInit(): void {
@@ -57,7 +65,10 @@ export class ProfileComponent implements OnInit {
       educations:this.educationService.getEducations(),
       experiences: this.experienceService.getExperience(),
       contact: this.contactService.getContact(),
-      address: this.addressService.getAddress()
+      address: this.addressService.getAddress(),
+      user: this.userService.getUser(),
+      skills:this.skillService.getSkills(),
+      languages:this.languageService.getLanguages()
     }
     console.log('jobseeker',this.jobseeker);
     

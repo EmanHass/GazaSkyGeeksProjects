@@ -19,7 +19,9 @@ export class AddressComponent implements OnInit {
 
   ngOnInit(): void {
     this.address = this.addressService.getAddress(); 
-    this.registrationFG.setValue(this.address)
+    if(this.address){
+      this.registrationFG.setValue(this.address)
+    }
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({

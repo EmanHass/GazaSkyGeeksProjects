@@ -1,4 +1,4 @@
-<app-education-add *ngIf="showAddFormStatus"  [formData]="formData" (onUpdate)="onFormUpdate()"></app-education-add>
+<app-language-add [index]="selectedIndex" *ngIf="showAddFormStatus" [formData]="formData" (onUpdate)="onFormUpdate()"></app-language-add>
 <div class="row">
     <div class="col-12">
       <div class="card">
@@ -25,29 +25,19 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>MajorID</th>
-                <th>CountryId</th>
-                <th>CityId</th>
-                <th>UniversityId</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Still Studying</th>
+                <th>Language Id</th>
+                <th>Level Id</th>
+                <th>Native</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody *ngIf="data && data.length > 0">
               <tr *ngFor="let item of data; let i = index">
                 <td>{{ item.id }}</td>
-                <td>{{ item.majorId }}</td>
-                <td>{{ item.countryId }}</td>
-                <td>{{ item.cityId }}</td>
-                <td>{{ item.universityId }}</td>
-                <td>{{ item.startDate }}</td>
-                <td>{{ item.endDate }}</td>
-                <td>{{ item.presentStatus? 'Yes': 'No' }}</td>
+                <td>{{ item.level}}</td>
+                <td>{{ item.native?'Yes':'No'}}</td>
                 <td>
-                  <button class="btn btn-xs" (click)="onEdit(item.id)">
+                  <button class="btn btn-xs" (click)="onEdit(i)">
                       <i class="fas fa-edit"></i>
                   </button>
                   <button class="btn btn-xs" (click)="remove(item.id)">

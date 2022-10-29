@@ -20,7 +20,9 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.contact = this.contactService.getContact(); 
-    this.registrationFG.setValue(this.contact)
+    if(this.contact){
+      this.registrationFG.setValue(this.contact)
+    }
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({

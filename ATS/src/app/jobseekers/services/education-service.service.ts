@@ -4,10 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EducationServiceService {
   eductions: Education[]=[
-    {id:1, majorId:1, countryId:1, cityId:1, universityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'yes'},
-    {id:2, majorId:1, countryId:1, cityId:1, universityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'yes'},
-    {id:3, majorId:1, countryId:1, cityId:1, universityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'yes'},
-    {id:4, majorId:1, countryId:1, cityId:1, universityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'yes'},  
+    {id:1, majorId:1, countryId:1, cityId:1, universityId:1, startDate: '2020-9-15', endDate: '', presentStatus:true},
+    {id:2, majorId:2, countryId:2, cityId:2, universityId:3, startDate: '2018-8-22', endDate: '2021-9-20', presentStatus:false},
   ];
   constructor() { }
 
@@ -20,8 +18,8 @@ export class EducationServiceService {
   getById(id:number): Education{
     return this.eductions.find(val => val.id === id);
   }
-  updateEducation(id: number, updatedUser: Education): void {
-    this.eductions = this.eductions.map(val => {
+  updateEducation(id: number, updatedUser: Education):void {    
+   this.eductions = this.eductions.map(val => {
       if (val.id == id) {
         return (val = updatedUser);
       } else return val;

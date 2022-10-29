@@ -14,11 +14,17 @@ export class EducationAddComponent implements OnInit {
 
   @Input() formData: Education;
   @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
+  isEdit: boolean = false;
+  showStatus: boolean = true;
   countryList: Dropdown[]=[];
   cityList: Dropdown[]=[];
   universityList: Dropdown[];
   majorList: Dropdown[];
   registrationFG: FormGroup;
+  selectedMajorId: number;
+  selectedCountryId: number;
+  selectedCityId: number;
+  selectedUniId: number;
 
   constructor(private educationService: EducationServiceService,private dropdownService:DropdownService) {
     this.initializationFG();    
@@ -29,9 +35,17 @@ export class EducationAddComponent implements OnInit {
     this.majorList = this.dropdownService.getMajors();
 
     if(this.formData){
-      this.registrationFG.setValue(this.formData)
+      this.isEdit=true;
+      this.registrationFG.setValue(this.formData);
+      this.selectedMajorId= this.formData.majorId;
+      this.selectedCountryId= this.formData.countryId;
+      this.cityList= this.dropdownService.getCities(this.formData.countryId);
+      this.selectedCityId= this.formData.cityId;
+      this.universityList=this.dropdownService.getUniversities(this.formData.cityId);
+      this.selectedUniId= this.formData.universityId;
+
     }else{
-      //add
+      this.isEdit=false;
     }
   }
   initializationFG(): void {
@@ -50,19 +64,33 @@ export class EducationAddComponent implements OnInit {
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.educationService.addEducation(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value)
+      this.onUpdate.emit(this.registrationFG.value);
+      this.showStatus=false
+    }else{
+      this.registrationFG.markAllAsTouched()
+    }
+  }
+  onEditForm():void{
+    if(this.registrationFG.valid){
+      this.educationService.updateEducation(this.formData.id, this.registrationFG.value);
+      this.onUpdate.emit(this.educationService.getEducations()); 
+      this.showStatus=false  
+    }else{
+      this.registrationFG.markAllAsTouched()
     }
   }
   onItemSelect(event: any, type: string){
+      let id= event.id;
     if(type == 'conutry'){
-      this.cityList=this.dropdownService.getCities(event.id)        
+      this.registrationFG.get('countryId').setValue(id);
+      this.cityList=this.dropdownService.getCities(id)        
     }else if(type == 'city'){
-      this.universityList= this.dropdownService.getUniversities(event.id)
+      this.registrationFG.get('cityId').setValue(id);
+      this.universityList= this.dropdownService.getUniversities(id)
     }else if(type == 'university'){
-
+      this.registrationFG.get('universityId').setValue(id);
     }else if(type == 'major'){
-      
+      this.registrationFG.get('majorId').setValue(id);
     }
-
   }
 }

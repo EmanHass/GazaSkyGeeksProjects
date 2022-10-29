@@ -6,5 +6,5 @@ export interface Education{
     universityId: number,
     startDate: string,
     endDate: string,
-    presentStatus:string
+    presentStatus:boolean
 }

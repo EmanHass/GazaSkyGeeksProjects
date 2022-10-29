@@ -8,7 +8,8 @@ declare var $:any;
 })
 export class DropdownSingleComponent implements OnInit, AfterViewInit {
   @Input() list: Dropdown[];
-  @Output() onItemSelect: EventEmitter<Dropdown> = new EventEmitter<Dropdown>()
+  @Output() onItemSelect: EventEmitter<Dropdown> = new EventEmitter<Dropdown>();
+  @Input() selesctedValue : number;
   constructor() { }
   ngAfterViewInit(): void {
     $('.select2').select2()
@@ -18,8 +19,7 @@ export class DropdownSingleComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(value:any){    
-    let item = this.list.find(i=>i.id== value);
-        
+    let item = this.list.find(i=>i.id== value);   
     this.onItemSelect.emit(item)   
   }
 

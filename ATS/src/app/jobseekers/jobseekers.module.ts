@@ -1,3 +1,5 @@
+import { SkillService } from './services/skill.service';
+import { UserService } from './services/user.service';
 import { AddressService } from './services/address.service';
 import { EducationServiceService } from './services/education-service.service';
 import { ProfileModule } from './profile/profile.module';
@@ -7,8 +9,17 @@ import { JobseekersRoutingModule } from './jobseekers-routing.module';
 import { SharedModules } from '../shared-modules/shared-modules.module';
 import { ContactService } from './services/contact.service';
 import { ExperienceServiceService } from './services/experience-service.service';
+import { LanguageService } from './services/language.service';
 
-
+const services=[
+  EducationServiceService,
+  ExperienceServiceService,
+  ContactService,
+  AddressService, 
+  UserService,
+  SkillService,
+  LanguageService
+]
 @NgModule({
   declarations: [],
   imports: [
@@ -17,6 +28,8 @@ import { ExperienceServiceService } from './services/experience-service.service'
     ProfileModule,
     SharedModules
   ],
-  providers:[EducationServiceService,ExperienceServiceService,ContactService, AddressService]
+  providers:[
+    ...services
+  ]
 })
 export class JobseekersModule { }

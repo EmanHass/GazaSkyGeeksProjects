@@ -11,7 +11,7 @@ export class EducationsComponent implements OnInit {
 
   showAddFormStatus: boolean = false;
   @Input() data: Education[] = [];
-  @Output() onUpdate: EventEmitter<Education[] | Education> = new EventEmitter<Education[] | Education>();
+  @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
 
   formData: Education=null;
   formType: number = 1;
@@ -36,10 +36,10 @@ export class EducationsComponent implements OnInit {
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.onUpdate.emit(this.formData);
+      this.displayEducations();
+      this.onUpdate.emit(this.data);
     }
   }
-
 
   onEdit(id: number): void {
     this.showAddFormStatus = false;
@@ -47,6 +47,8 @@ export class EducationsComponent implements OnInit {
     setTimeout(()=>{
       this.showAddFormStatus = true;
       this.formData= this.educationService.getById(id);
+      console.log('formdata',this.formData);
+      
     },500)
   }
   remove(id:number):void{

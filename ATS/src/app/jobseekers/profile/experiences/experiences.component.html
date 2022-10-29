@@ -1,10 +1,10 @@
-<app-experiences-add *ngIf="showAddFormStatus"></app-experiences-add>
+<app-experiences-add *ngIf="showAddFormStatus" [formData]="formData" (onUpdate)="onFormUpdate()"></app-experiences-add>
 
 <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Educations</h3>
+          <h3 class="card-title">Experiences</h3>
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 350px;">
@@ -33,13 +33,13 @@
                 <th>CityId</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Still Studying</th>
+                <th>Still Work</th>
                 <th>Salary</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody *ngIf="experiences && experiences.length > 0">
-              <tr *ngFor="let item of experiences; let i = index">
+            <tbody *ngIf="data && data.length > 0">
+              <tr *ngFor="let item of data; let i = index">
                 <td>{{ item.id }}</td>
                 <td>{{ item.position }}</td>
                 <td>{{ item.company }}</td>
@@ -47,12 +47,12 @@
                 <td>{{ item.cityId }}</td>
                 <td>{{ item.startDate }}</td>
                 <td>{{ item.endDate }}</td>
-                <td>{{ item.presentStatus }}</td>
+                <td>{{ item.presentStatus? 'Yes':'No' }}</td>
                 <td>{{ item.salary }}</td>
                 <td>
-                  <button class="btn btn-xs" >
-                      <i class="fas fa-edit"></i>
-                  </button>
+                  <button class="btn btn-xs" (click)="onEdit(item.id)">
+                    <i class="fas fa-edit"></i>
+                </button>
                   <button class="btn btn-xs" (click)="remove(item.id)">
                       <i class="fas fa-trash"></i>
                   </button>

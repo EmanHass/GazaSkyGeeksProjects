@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   skills: Skill[];
   languages: Language[];
   
-   constructor(private jobseekersService:JobseekersService) { }
+  constructor(private jobseekersService:JobseekersService) { }
 
   ngOnInit(): void {
     this.educations = this.jobseekersService.getEducations();

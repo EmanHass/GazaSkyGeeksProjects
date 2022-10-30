@@ -1,4 +1,4 @@
-<app-experiences-add *ngIf="showAddFormStatus" [formData]="formData" (onUpdate)="onFormUpdate()"></app-experiences-add>
+<app-experiences-add *ngIf="showAddFormStatus" [data]="data" [formData]="formData" (onUpdate)="onFormUpdate($event)"></app-experiences-add>
 
 <div class="row">
     <div class="col-12">

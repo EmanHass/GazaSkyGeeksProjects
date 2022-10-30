@@ -1,7 +1,5 @@
 import { Language } from './../../../shared-modules/models/language.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LanguageService } from '../../services/language.service';
-
 @Component({
   selector: 'app-languages',
   templateUrl: './languages.component.html',
@@ -15,13 +13,13 @@ export class LanguagesComponent implements OnInit {
   selectedIndex: number;
   formData: Language=null;
   formType: number = 1;
-  constructor(private languageService: LanguageService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.displayLanguage();
-  }
-  displayLanguage():void{
-    this.data= this.languageService.getLanguages();
+    this.data= [
+      {id:1, level:1, native:true},
+      {id:2, level:2, native:false},
+    ];
   }
 
   toggleAddForm(): void {
@@ -30,13 +28,14 @@ export class LanguagesComponent implements OnInit {
     this.showAddFormStatus = !this.showAddFormStatus;
   }
 
-  onFormUpdate(){
+  onFormUpdate(value: Language[]){
     if(this.formType === 1){
       //add
+      this.data=value;
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.displayLanguage();
+      this.data=value;
       this.onUpdate.emit(this.data);
     }
   }
@@ -52,8 +51,8 @@ export class LanguagesComponent implements OnInit {
   }
 
   remove(id:number):void{
-    this.data=this.languageService.removeLanguage(id);
-    this.onUpdate.emit(this.data)    
+    this.data=this.data.filter(val => val.id !== id);
+    this.onUpdate.emit(this.data);     
   }
 
 }

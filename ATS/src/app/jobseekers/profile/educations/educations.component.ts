@@ -1,5 +1,4 @@
 import { Education } from './../../../shared-modules/models/education.model';
-import { EducationServiceService } from './../../services/education-service.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -15,13 +14,13 @@ export class EducationsComponent implements OnInit {
 
   formData: Education=null;
   formType: number = 1;
-  constructor(private educationService: EducationServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.displayEducations();
-  }
-  displayEducations():void{
-    this.data= this.educationService.getEducations();
+    this.data= [
+      {id:1, majorId:1, countryId:1, cityId:1, universityId:1, startDate: '2020-9-15', endDate: '', presentStatus:true},
+      {id:2, majorId:2, countryId:2, cityId:2, universityId:3, startDate: '2018-8-22', endDate: '2021-9-20', presentStatus:false},
+    ];
   }
 
   toggleAddForm(): void {
@@ -30,13 +29,14 @@ export class EducationsComponent implements OnInit {
     this.showAddFormStatus = !this.showAddFormStatus;
   }
 
-  onFormUpdate(){
+  onFormUpdate(value: Education[]){
     if(this.formType === 1){
       //add
+      this.data=value;
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.displayEducations();
+      this.data=value;
       this.onUpdate.emit(this.data);
     }
   }
@@ -46,13 +46,13 @@ export class EducationsComponent implements OnInit {
     this.formType = 2;
     setTimeout(()=>{
       this.showAddFormStatus = true;
-      this.formData= this.educationService.getById(id);
+      this.formData= this.data.find(val => val.id === id);
       console.log('formdata',this.formData);
       
     },500)
   }
   remove(id:number):void{
-    this.data=this.educationService.removeEducation(id);
+    this.data=this.data.filter(val => val.id !== id);
     this.onUpdate.emit(this.data)    
   }
 

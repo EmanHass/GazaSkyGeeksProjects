@@ -1,5 +1,4 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AddressService } from './../../../jobseekers/services/address.service';
 import { Address } from './../../models/address.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -13,12 +12,18 @@ export class AddressComponent implements OnInit {
   @Output() onUpdate: EventEmitter<Address> = new EventEmitter<Address>()
   registrationFG: FormGroup;
   address:Address;  
-  constructor(private addressService:AddressService) {
+  constructor() {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
-    this.address = this.addressService.getAddress(); 
+    this.address = {
+      country: 'palestine',
+      region: 'AlRemal',
+      city: 'Gaza',
+      street: 'Alshawa',
+      buildingNumber: 500
+    }; 
     if(this.address){
       this.registrationFG.setValue(this.address)
     }
@@ -32,11 +37,10 @@ export class AddressComponent implements OnInit {
       buildingNumber: new FormControl('', [Validators.required]),
     });
   }
-  onUpdateAddress():void{
-    
+  onUpdateAddress():void{   
     if(this.registrationFG.valid){
-      this.addressService.UpdateAddress(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value)     
+      this.address = this.registrationFG.value;
+      this.onUpdate.emit(this.address);     
     }else{
       this.registrationFG.markAllAsTouched()
     }

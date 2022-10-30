@@ -11,22 +11,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class UserInfoComponent implements OnInit {
   @Input() data: User;
   @Output() onUpdate: EventEmitter<User> = new EventEmitter<User>()
-  registrationFG: FormGroup;
-  user:User;  
+  registrationFG: FormGroup; 
   isSuccess: boolean=false;
   constructor() {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
-    this.user = {
-      id: 1,
-      firstName: 'Eman',
-      lastName: 'Hassouna',
-      email: 'eman@gmail.com',
-      role: Role.JOBSEEKER
-    }; 
-    this.registrationFG.setValue(this.user)
+    this.registrationFG.setValue(this.data)
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -39,8 +31,8 @@ export class UserInfoComponent implements OnInit {
   }
   onUpdateUser():void{    
     if(this.registrationFG.valid){
-      this.user= this.registrationFG.value;
-      this.onUpdate.emit(this.user);
+      this.data= this.registrationFG.value;
+      this.onUpdate.emit(this.data);
       this.isSuccess = true;
       setTimeout(()=>{
         this.isSuccess = false; 

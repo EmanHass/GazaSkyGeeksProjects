@@ -13,13 +13,10 @@ export class ExperiencesComponent implements OnInit {
   @Output() onUpdate: EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
   formData: Experience;
   formType: number = 1;
+
   constructor() { }
 
   ngOnInit(): void {
-    this.data=[
-      {id:1, position:'manager',company:'GSG', countryId:1, cityId:1, startDate:'25-5-2015', endDate:'25-5-2025',presentStatus:'Yes', salary:5000},
-      {id:2, position:'developer',company:'GSG', countryId:2, cityId:1, startDate:'25-5-2015', endDate:'25-5-2019',presentStatus:'No', salary:6000},
-    ];
   }
   toggleAddForm(): void {
     this.formType = 1;

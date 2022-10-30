@@ -19,14 +19,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contact = {
-      id: 1,
-      email: 'eman@gmail.com',
-      phone: 28123456,
-      mobile: 92524307,
-      fax: 5
-    };
-    this.registrationFG.setValue(this.contact)
+    this.registrationFG.setValue(this.data)
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -40,8 +33,8 @@ export class ContactComponent implements OnInit {
 
   onUpdateContact():void{
     if(this.registrationFG.valid){
-      this.contact = this.registrationFG.value;
-      this.onUpdate.emit(this.contact);
+      this.data = this.registrationFG.value;
+      this.onUpdate.emit(this.data);
       this.isSuccess = true; 
       setTimeout(()=>{
         this.isSuccess = false; 

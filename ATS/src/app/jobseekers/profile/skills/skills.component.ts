@@ -17,10 +17,6 @@ export class SkillsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.data= [
-      {id:1, levelId:1},
-      {id:2, levelId:2},
-    ];
   }
 
   toggleAddForm(): void {

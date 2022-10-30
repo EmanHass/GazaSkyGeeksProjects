@@ -19,7 +19,8 @@ export class SkillAddComponent implements OnInit {
   levelsList: Dropdown[]=[];
   selectedSkill: number;
   selectedLevel: number;
-
+  isSuccess: boolean= false;
+  successMsg: string;
   constructor(private dropdownService:DropdownService) {   
   }
 
@@ -39,13 +40,23 @@ export class SkillAddComponent implements OnInit {
     if(this.selectedSkill && this.selectedLevel){
       this.data.push({id:this.selectedSkill, levelId:this.selectedLevel});
       this.onUpdate.emit(this.data);
-      this.showStatus=false
+      this.showStatus=false;
+      this.isSuccess = true;
+      this.successMsg = 'Success  Add!'
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)  
     }
   }
   onEditForm():void{  
     this.data[this.index] = {id: this.selectedSkill, levelId:this.selectedLevel};
     this.onUpdate.emit(this.data); 
-    this.showStatus=false; 
+    this.showStatus=false;
+    this.isSuccess = true;
+    this.successMsg = 'Success Update!'
+    setTimeout(()=>{
+      this.isSuccess = false; 
+    },2000) 
   }
 
   onItemSelect(event: any, type: string){

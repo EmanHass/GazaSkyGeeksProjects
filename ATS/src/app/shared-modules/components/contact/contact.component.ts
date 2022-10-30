@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   @Output() onUpdate: EventEmitter<Contact> = new EventEmitter<Contact>()
   registrationFG: FormGroup;
   contact:Contact;  
+  isSuccess: boolean=false;
   constructor() {
     this.initializationFG();    
   }
@@ -25,9 +26,7 @@ export class ContactComponent implements OnInit {
       mobile: 92524307,
       fax: 5
     };
-    if(this.contact){
-      this.registrationFG.setValue(this.contact)
-    }
+    this.registrationFG.setValue(this.contact)
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -42,7 +41,11 @@ export class ContactComponent implements OnInit {
   onUpdateContact():void{
     if(this.registrationFG.valid){
       this.contact = this.registrationFG.value;
-      this.onUpdate.emit(this.contact);    
+      this.onUpdate.emit(this.contact);
+      this.isSuccess = true; 
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)   
     }else{
       this.registrationFG.markAllAsTouched()
     }

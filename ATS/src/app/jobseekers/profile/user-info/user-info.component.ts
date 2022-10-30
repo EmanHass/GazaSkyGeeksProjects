@@ -13,6 +13,7 @@ export class UserInfoComponent implements OnInit {
   @Output() onUpdate: EventEmitter<User> = new EventEmitter<User>()
   registrationFG: FormGroup;
   user:User;  
+  isSuccess: boolean=false;
   constructor() {
     this.initializationFG();    
   }
@@ -25,9 +26,7 @@ export class UserInfoComponent implements OnInit {
       email: 'eman@gmail.com',
       role: Role.JOBSEEKER
     }; 
-    if(this.user){
-      this.registrationFG.setValue(this.user)
-    }
+    this.registrationFG.setValue(this.user)
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -38,15 +37,17 @@ export class UserInfoComponent implements OnInit {
       role: new FormControl('', [Validators.required]),
     });
   }
-  onUpdateUser():void{
-    
+  onUpdateUser():void{    
     if(this.registrationFG.valid){
       this.user= this.registrationFG.value;
-      this.onUpdate.emit(this.registrationFG.value)     
+      this.onUpdate.emit(this.user);
+      this.isSuccess = true;
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)      
     }else{
       this.registrationFG.markAllAsTouched()
     }
-
   }
 
 }

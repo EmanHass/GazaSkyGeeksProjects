@@ -11,7 +11,8 @@ export class AddressComponent implements OnInit {
   @Input() data: Address;
   @Output() onUpdate: EventEmitter<Address> = new EventEmitter<Address>()
   registrationFG: FormGroup;
-  address:Address;  
+  address:Address; 
+  isSuccess: boolean =false; 
   constructor() {
     this.initializationFG();    
   }
@@ -40,7 +41,11 @@ export class AddressComponent implements OnInit {
   onUpdateAddress():void{   
     if(this.registrationFG.valid){
       this.address = this.registrationFG.value;
-      this.onUpdate.emit(this.address);     
+      this.onUpdate.emit(this.address); 
+      this.isSuccess = true;
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000) 
     }else{
       this.registrationFG.markAllAsTouched()
     }

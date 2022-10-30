@@ -46,9 +46,7 @@ export class EducationsComponent implements OnInit {
     this.formType = 2;
     setTimeout(()=>{
       this.showAddFormStatus = true;
-      this.formData= this.data.find(val => val.id === id);
-      console.log('formdata',this.formData);
-      
+      this.formData= this.data.find(val => val.id === id);      
     },500)
   }
   remove(id:number):void{

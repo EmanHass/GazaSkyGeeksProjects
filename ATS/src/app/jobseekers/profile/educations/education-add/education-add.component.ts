@@ -25,6 +25,8 @@ export class EducationAddComponent implements OnInit {
   selectedCountryId: number;
   selectedCityId: number;
   selectedUniId: number;
+  isSuccess: boolean= false;
+  successMsg: string;
 
   constructor(private dropdownService:DropdownService) {
     this.initializationFG();    
@@ -58,7 +60,7 @@ export class EducationAddComponent implements OnInit {
       universityId: new FormControl('', [Validators.required]),
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
-      presentStatus: new FormControl('', [Validators.required]),
+      presentStatus: new FormControl('false', [Validators.required]),
     });
   }
 
@@ -66,7 +68,12 @@ export class EducationAddComponent implements OnInit {
     if (this.registrationFG.valid) {
       this.data.push(this.registrationFG.value);
       this.onUpdate.emit(this.data);
-      this.showStatus=false
+      this.showStatus=false;
+      this.isSuccess = true;
+      this.successMsg = 'Success  Add!'
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)  
     }else{
       this.registrationFG.markAllAsTouched()
     }
@@ -79,7 +86,12 @@ export class EducationAddComponent implements OnInit {
         } else return val;
       });
       this.onUpdate.emit(this.data); 
-      this.showStatus=false  
+      this.showStatus=false ;
+      this.isSuccess = true;
+      this.successMsg = 'Success Update!'
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)  
     }else{
       this.registrationFG.markAllAsTouched()
     }

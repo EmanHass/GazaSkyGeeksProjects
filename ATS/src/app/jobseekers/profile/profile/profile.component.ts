@@ -35,11 +35,9 @@ export class ProfileComponent implements OnInit {
     }else
     if(type == 'education'){
       this.educations = data;
-      console.log('educations',this.educations);
     }else
     if(type == 'experience'){
       this.experiences = data;
-      console.log('experience',this.experiences);
     }else if(type == 'contact'){
       this.contact=data
     }else if(type == 'skill'){

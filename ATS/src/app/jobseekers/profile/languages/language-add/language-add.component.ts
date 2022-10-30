@@ -20,6 +20,8 @@ export class LanguageAddComponent implements OnInit {
   selectedLanguage: number;
   selectedLevel: number;
   selectedNative: boolean;
+  isSuccess: boolean= false;
+  successMsg: string;
   constructor(private dropdownService:DropdownService) {   
   }
 
@@ -37,18 +39,27 @@ export class LanguageAddComponent implements OnInit {
     }
   }
   onsubmitForm(): void {
-    console.log('submit');
     
     if(this.selectedLanguage && this.selectedLevel){
       this.data.push({id:this.selectedLanguage, level:this.selectedLevel, native:this.selectedNative});
       this.onUpdate.emit(this.data);
       this.showStatus=false;
+      this.isSuccess = true;
+      this.successMsg = 'Success  Add!'
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)  
     }
   }
   onEditForm():void{    
       this.data[this.index] = {id:this.selectedLanguage,level: this.selectedLevel, native:this.selectedNative};
       this.onUpdate.emit(this.data); 
       this.showStatus=false; 
+      this.isSuccess = true;
+      this.successMsg = 'Success Update!'
+      setTimeout(()=>{
+        this.isSuccess = false; 
+      },2000)  
   }
 
   onItemSelect(event: any, type: string){    

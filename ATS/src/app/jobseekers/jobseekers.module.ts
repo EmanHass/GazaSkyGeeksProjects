@@ -1,3 +1,4 @@
+import { JobseekersService } from './jobseekers.service';
 import { ProfileModule } from './profile/profile.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,9 @@ import { SharedModules } from '../shared-modules/shared-modules.module';
     JobseekersRoutingModule,
     ProfileModule,
     SharedModules
+  ],
+  providers:[
+    JobseekersService
   ]
 })
 export class JobseekersModule { }

@@ -64,6 +64,7 @@ export class EducationAddComponent implements OnInit {
     });
   }
 
+  // when add a new item
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
       this.data.push(this.registrationFG.value);
@@ -78,6 +79,8 @@ export class EducationAddComponent implements OnInit {
       this.registrationFG.markAllAsTouched()
     }
   }
+
+  // when edit item
   onEditForm():void{
     if(this.registrationFG.valid){
       this.data = this.data.map(val => {
@@ -97,6 +100,7 @@ export class EducationAddComponent implements OnInit {
     }
   }
 
+  // when select item from dropdown then save it in registraion form group
   onItemSelect(event: any, type: string){
       let id= event.id;
     if(type == 'conutry'){

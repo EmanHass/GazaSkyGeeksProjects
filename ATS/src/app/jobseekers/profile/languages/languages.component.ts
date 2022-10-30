@@ -16,10 +16,6 @@ export class LanguagesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.data= [
-      {id:1, level:1, native:true},
-      {id:2, level:2, native:false},
-    ];
   }
 
   toggleAddForm(): void {

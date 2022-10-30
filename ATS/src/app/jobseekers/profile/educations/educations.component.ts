@@ -17,10 +17,6 @@ export class EducationsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.data= [
-      {id:1, majorId:1, countryId:1, cityId:1, universityId:1, startDate: '2020-9-15', endDate: '', presentStatus:true},
-      {id:2, majorId:2, countryId:2, cityId:2, universityId:3, startDate: '2018-8-22', endDate: '2021-9-20', presentStatus:false},
-    ];
   }
 
   toggleAddForm(): void {

@@ -11,23 +11,13 @@ export class AddressComponent implements OnInit {
   @Input() data: Address;
   @Output() onUpdate: EventEmitter<Address> = new EventEmitter<Address>()
   registrationFG: FormGroup;
-  address:Address; 
   isSuccess: boolean =false; 
   constructor() {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
-    this.address = {
-      country: 'palestine',
-      region: 'AlRemal',
-      city: 'Gaza',
-      street: 'Alshawa',
-      buildingNumber: 500
-    }; 
-    if(this.address){
-      this.registrationFG.setValue(this.address)
-    }
+      this.registrationFG.setValue(this.data)
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
@@ -40,8 +30,8 @@ export class AddressComponent implements OnInit {
   }
   onUpdateAddress():void{   
     if(this.registrationFG.valid){
-      this.address = this.registrationFG.value;
-      this.onUpdate.emit(this.address); 
+      this.data = this.registrationFG.value;
+      this.onUpdate.emit(this.data); 
       this.isSuccess = true;
       setTimeout(()=>{
         this.isSuccess = false; 

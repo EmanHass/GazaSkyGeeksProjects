@@ -1,3 +1,4 @@
+import { JobseekersService } from './../../jobseekers.service';
 import { Language } from './../../../shared-modules/models/language.model';
 import { Experience } from './../../../shared-modules/models/experience.model';
 import { Education } from './../../../shared-modules/models/education.model';
@@ -24,9 +25,16 @@ export class ProfileComponent implements OnInit {
   skills: Skill[];
   languages: Language[];
   
-   constructor() { }
+  constructor(private jobseekersService:JobseekersService) { }
 
   ngOnInit(): void {
+    this.educations = this.jobseekersService.getEducations();
+    this.experiences = this.jobseekersService.getExperiences();
+    this.address = this.jobseekersService.getAddress();
+    this.contact = this.jobseekersService.getContact();
+    this.user = this.jobseekersService.getUser();
+    this.skills = this.jobseekersService.getSkills();
+    this.languages = this.jobseekersService.getLanguages();
   }
 
   onProfileUpdate(data: any, type: string): void {
@@ -50,15 +58,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onSaveAll():void{
-    // this.jobseeker={
-    //   educations:this.educationService.getEducations(),
-    //   experiences: this.experienceService.getExperience(),
-    //   contact: this.contactService.getContact(),
-    //   address: this.addressService.getAddress(),
-    //   user: this.userService.getUser(),
-    //   skills:this.skillService.getSkills(),
-    //   languages:this.languageService.getLanguages()
-    // }
 
     this.jobseeker={
       educations:this.educations,
@@ -69,7 +68,6 @@ export class ProfileComponent implements OnInit {
       skills:this.skills,
       languages:this.languages
     }
-    console.log('jobseeker',this.jobseeker);
-    
+    console.log('jobseeker',this.jobseeker);   
   }
 }

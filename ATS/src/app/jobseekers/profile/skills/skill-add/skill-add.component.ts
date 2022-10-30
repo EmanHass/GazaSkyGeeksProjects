@@ -1,5 +1,4 @@
 import { DropdownService } from './../../../../shared-modules/services/dropdown.service';
-import { SkillService } from './../../../services/skill.service';
 import { Dropdown } from './../../../../shared-modules/models/dropdown-models/dropdown.model';
 import { Skill } from './../../../../shared-modules/models/skill.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -12,6 +11,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SkillAddComponent implements OnInit {
   @Input() index: number;
   @Input() formData: Skill;
+  @Input() data: Skill[];
   @Output() onUpdate: EventEmitter<Skill[]> = new EventEmitter<Skill[]>();
   showStatus: boolean= true;
   isEdit: boolean = false;
@@ -20,7 +20,7 @@ export class SkillAddComponent implements OnInit {
   selectedSkill: number;
   selectedLevel: number;
 
-  constructor(private skillService: SkillService,private dropdownService:DropdownService) {   
+  constructor(private dropdownService:DropdownService) {   
   }
 
   ngOnInit(): void {
@@ -37,15 +37,15 @@ export class SkillAddComponent implements OnInit {
   }
   onsubmitForm(): void {
     if(this.selectedSkill && this.selectedLevel){
-      this.skillService.addSkill({id:this.selectedSkill,levelId: this.selectedLevel});
-      this.onUpdate.emit(this.skillService.getSkills());
+      this.data.push({id:this.selectedSkill, levelId:this.selectedLevel});
+      this.onUpdate.emit(this.data);
       this.showStatus=false
     }
   }
-  onEditForm():void{    
-      this.skillService.updateSkill(this.index, {id:this.selectedSkill,levelId: this.selectedLevel});  
-      this.onUpdate.emit(this.skillService.getSkills()); 
-      this.showStatus=false 
+  onEditForm():void{  
+    this.data[this.index] = {id: this.selectedSkill, levelId:this.selectedLevel};
+    this.onUpdate.emit(this.data); 
+    this.showStatus=false; 
   }
 
   onItemSelect(event: any, type: string){

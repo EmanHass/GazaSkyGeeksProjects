@@ -1,4 +1,3 @@
-import { SkillService } from './../../services/skill.service';
 import { Skill } from 'src/app/shared-modules/models/skill.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -15,13 +14,13 @@ export class SkillsComponent implements OnInit {
   selectedIndex: number;
   formData: Skill=null;
   formType: number = 1;
-  constructor(private skillService: SkillService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.displaySkills();
-  }
-  displaySkills():void{
-    this.data= this.skillService.getSkills();
+    this.data= [
+      {id:1, levelId:1},
+      {id:2, levelId:2},
+    ];
   }
 
   toggleAddForm(): void {
@@ -30,13 +29,14 @@ export class SkillsComponent implements OnInit {
     this.showAddFormStatus = !this.showAddFormStatus;
   }
 
-  onFormUpdate(){
+  onFormUpdate(value: Skill[]){
     if(this.formType === 1){
       //add
+      this.data=value;
       this.onUpdate.emit(this.data);
     }else{
       //edit
-      this.displaySkills();
+      this.data=value;
       this.onUpdate.emit(this.data);
     }
   }
@@ -51,8 +51,8 @@ export class SkillsComponent implements OnInit {
     },500)
   }
   remove(id:number):void{
-    this.data=this.skillService.removeSkill(id);
-    this.onUpdate.emit(this.data)    
+    this.data=this.data.filter(val => val.id !== id);
+    this.onUpdate.emit(this.data);    
   }
 
 }

@@ -1,4 +1,4 @@
-<app-education-add *ngIf="showAddFormStatus"  [formData]="formData" (onUpdate)="onFormUpdate()"></app-education-add>
+<app-education-add *ngIf="showAddFormStatus" [data]="data" [formData]="formData" (onUpdate)="onFormUpdate($event)"></app-education-add>
 <div class="row">
     <div class="col-12">
       <div class="card">

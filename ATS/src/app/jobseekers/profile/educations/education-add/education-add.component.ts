@@ -1,7 +1,6 @@
 import { DropdownService } from './../../../../shared-modules/services/dropdown.service';
 import { Dropdown } from './../../../../shared-modules/models/dropdown-models/dropdown.model';
 import { Education } from './../../../../shared-modules/models/education.model';
-import { EducationServiceService } from './../../../services/education-service.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -13,6 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class EducationAddComponent implements OnInit {
 
   @Input() formData: Education;
+  @Input() data: Education[];
   @Output() onUpdate: EventEmitter<Education[]> = new EventEmitter<Education[]>();
   isEdit: boolean = false;
   showStatus: boolean = true;
@@ -26,11 +26,12 @@ export class EducationAddComponent implements OnInit {
   selectedCityId: number;
   selectedUniId: number;
 
-  constructor(private educationService: EducationServiceService,private dropdownService:DropdownService) {
+  constructor(private dropdownService:DropdownService) {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
+    
     this.countryList=this.dropdownService.getCountries();
     this.majorList = this.dropdownService.getMajors();
 
@@ -63,8 +64,8 @@ export class EducationAddComponent implements OnInit {
 
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
-      this.educationService.addEducation(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value);
+      this.data.push(this.registrationFG.value);
+      this.onUpdate.emit(this.data);
       this.showStatus=false
     }else{
       this.registrationFG.markAllAsTouched()
@@ -72,13 +73,18 @@ export class EducationAddComponent implements OnInit {
   }
   onEditForm():void{
     if(this.registrationFG.valid){
-      this.educationService.updateEducation(this.formData.id, this.registrationFG.value);
-      this.onUpdate.emit(this.educationService.getEducations()); 
+      this.data = this.data.map(val => {
+        if (val.id == this.formData.id) {
+          return (val = this.registrationFG.value);
+        } else return val;
+      });
+      this.onUpdate.emit(this.data); 
       this.showStatus=false  
     }else{
       this.registrationFG.markAllAsTouched()
     }
   }
+
   onItemSelect(event: any, type: string){
       let id= event.id;
     if(type == 'conutry'){

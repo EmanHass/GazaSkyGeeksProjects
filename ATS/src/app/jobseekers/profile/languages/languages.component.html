@@ -1,4 +1,4 @@
-<app-language-add [index]="selectedIndex" *ngIf="showAddFormStatus" [formData]="formData" (onUpdate)="onFormUpdate()"></app-language-add>
+<app-language-add [index]="selectedIndex" *ngIf="showAddFormStatus" [data]="data" [formData]="formData" (onUpdate)="onFormUpdate($event)"></app-language-add>
 <div class="row">
     <div class="col-12">
       <div class="card">

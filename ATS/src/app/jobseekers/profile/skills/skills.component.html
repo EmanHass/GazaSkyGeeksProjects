@@ -1,4 +1,4 @@
-<app-skill-add [index]="selectedIndex" *ngIf="showAddFormStatus" [formData]="formData" (onUpdate)="onFormUpdate()"></app-skill-add>
+<app-skill-add [index]="selectedIndex" *ngIf="showAddFormStatus" [data]="data" [formData]="formData" (onUpdate)="onFormUpdate($event)"></app-skill-add>
 <div class="row">
     <div class="col-12">
       <div class="card">
@@ -35,7 +35,7 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.levelId }}</td>
                 <td>
-                  <button class="btn btn-xs" (click)="onEdit(item.id)">
+                  <button class="btn btn-xs" (click)="onEdit(i)">
                       <i class="fas fa-edit"></i>
                   </button>
                   <button class="btn btn-xs" (click)="remove(item.id)">

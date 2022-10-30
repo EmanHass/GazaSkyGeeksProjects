@@ -1,7 +1,7 @@
+import { Role } from 'src/app/shared-modules/models/enums/role.enum';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from './../../../shared-modules/models/user.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-info',
@@ -13,12 +13,18 @@ export class UserInfoComponent implements OnInit {
   @Output() onUpdate: EventEmitter<User> = new EventEmitter<User>()
   registrationFG: FormGroup;
   user:User;  
-  constructor(private userService:UserService) {
+  constructor() {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
-    this.user = this.userService.getUser(); 
+    this.user = {
+      id: 1,
+      firstName: 'Eman',
+      lastName: 'Hassouna',
+      email: 'eman@gmail.com',
+      role: Role.JOBSEEKER
+    }; 
     if(this.user){
       this.registrationFG.setValue(this.user)
     }
@@ -35,7 +41,7 @@ export class UserInfoComponent implements OnInit {
   onUpdateUser():void{
     
     if(this.registrationFG.valid){
-      this.userService.UpdateUser(this.registrationFG.value);
+      this.user= this.registrationFG.value;
       this.onUpdate.emit(this.registrationFG.value)     
     }else{
       this.registrationFG.markAllAsTouched()

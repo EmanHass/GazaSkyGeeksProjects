@@ -1,6 +1,5 @@
 import { DropdownService } from './../../../../shared-modules/services/dropdown.service';
 import { Experience } from './../../../../shared-modules/models/experience.model';
-import { ExperienceServiceService } from './../../../services/experience-service.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dropdown } from 'src/app/shared-modules/models/dropdown-models/dropdown.model';
@@ -13,6 +12,7 @@ import { Dropdown } from 'src/app/shared-modules/models/dropdown-models/dropdown
 export class ExperiencesAddComponent implements OnInit {
 
   @Input() formData: any;
+  @Input() data: Experience[];
   @Output() onUpdate : EventEmitter<Experience[]> = new EventEmitter<Experience[]>()
   registrationFG: FormGroup;
   isEdit: boolean = false;
@@ -35,7 +35,7 @@ export class ExperiencesAddComponent implements OnInit {
     }
   }
 
-  constructor(private experienceService: ExperienceServiceService, private dropdownService:DropdownService) {
+  constructor(private dropdownService:DropdownService) {
     this.initializationFG();    
   }
   initializationFG(): void {
@@ -53,8 +53,8 @@ export class ExperiencesAddComponent implements OnInit {
   }
   onsubmitForm(): void {
     if (this.registrationFG.valid) {
-      this.experienceService.addExperience(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value);
+      this.data.push(this.registrationFG.value);
+      this.onUpdate.emit(this.data);
       this.showStatus=false
     }else{
       this.registrationFG.markAllAsTouched()
@@ -63,9 +63,13 @@ export class ExperiencesAddComponent implements OnInit {
 
   onEditForm():void{
     if(this.registrationFG.valid){
-      this.experienceService.updateExperience(this.formData.id, this.registrationFG.value);
-      this.onUpdate.emit(this.experienceService.getExperience());
-      this.showStatus=false   
+      this.data = this.data.map(val => {
+        if (val.id == this.formData.id) {
+          return (val = this.registrationFG.value);
+        } else return val;
+      });
+      this.onUpdate.emit(this.data); 
+      this.showStatus=false;   
     }else{
       this.registrationFG.markAllAsTouched()
     }

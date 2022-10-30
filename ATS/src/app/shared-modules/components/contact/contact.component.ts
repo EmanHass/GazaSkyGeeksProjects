@@ -1,4 +1,3 @@
-import { ContactService } from './../../../jobseekers/services/contact.service';
 import { Contact } from './../../models/contact.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,12 +13,18 @@ export class ContactComponent implements OnInit {
   @Output() onUpdate: EventEmitter<Contact> = new EventEmitter<Contact>()
   registrationFG: FormGroup;
   contact:Contact;  
-  constructor(private contactService:ContactService) {
+  constructor() {
     this.initializationFG();    
   }
 
   ngOnInit(): void {
-    this.contact = this.contactService.getContact(); 
+    this.contact = {
+      id: 1,
+      email: 'eman@gmail.com',
+      phone: 28123456,
+      mobile: 92524307,
+      fax: 5
+    };
     if(this.contact){
       this.registrationFG.setValue(this.contact)
     }
@@ -36,8 +41,8 @@ export class ContactComponent implements OnInit {
 
   onUpdateContact():void{
     if(this.registrationFG.valid){
-      this.contactService.UpdateContact(this.registrationFG.value);
-      this.onUpdate.emit(this.registrationFG.value)     
+      this.contact = this.registrationFG.value;
+      this.onUpdate.emit(this.contact);    
     }else{
       this.registrationFG.markAllAsTouched()
     }

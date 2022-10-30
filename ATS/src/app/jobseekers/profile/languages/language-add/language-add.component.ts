@@ -1,5 +1,4 @@
 import { DropdownService } from './../../../../shared-modules/services/dropdown.service';
-import { LanguageService } from './../../../services/language.service';
 import { Dropdown } from './../../../../shared-modules/models/dropdown-models/dropdown.model';
 import { Language } from './../../../../shared-modules/models/language.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -12,6 +11,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class LanguageAddComponent implements OnInit {
   @Input() index: number;
   @Input() formData: Language;
+  @Input() data: Language[];
   @Output() onUpdate: EventEmitter<Language[]> = new EventEmitter<Language[]>();
   showStatus: boolean= true;
   isEdit: boolean = false;
@@ -20,7 +20,7 @@ export class LanguageAddComponent implements OnInit {
   selectedLanguage: number;
   selectedLevel: number;
   selectedNative: boolean;
-  constructor(private languageService: LanguageService,private dropdownService:DropdownService) {   
+  constructor(private dropdownService:DropdownService) {   
   }
 
   ngOnInit(): void {
@@ -37,21 +37,21 @@ export class LanguageAddComponent implements OnInit {
     }
   }
   onsubmitForm(): void {
+    console.log('submit');
+    
     if(this.selectedLanguage && this.selectedLevel){
-      this.languageService.addLanguage({id:this.selectedLanguage,level: this.selectedLevel, native:this.selectedNative});
-      this.onUpdate.emit(this.languageService.getLanguages());
-      this.showStatus=false
+      this.data.push({id:this.selectedLanguage, level:this.selectedLevel, native:this.selectedNative});
+      this.onUpdate.emit(this.data);
+      this.showStatus=false;
     }
   }
   onEditForm():void{    
-      this.languageService.updateLanguage(this.index, {id:this.selectedLanguage,level: this.selectedLevel, native:this.selectedNative});  
-      this.onUpdate.emit(this.languageService.getLanguages()); 
-      this.showStatus=false 
+      this.data[this.index] = {id:this.selectedLanguage,level: this.selectedLevel, native:this.selectedNative};
+      this.onUpdate.emit(this.data); 
+      this.showStatus=false; 
   }
 
-  onItemSelect(event: any, type: string){
-    console.log(event);
-    
+  onItemSelect(event: any, type: string){    
   let id= event.id;
   if(type == 'language'){
     this.selectedLanguage = id;

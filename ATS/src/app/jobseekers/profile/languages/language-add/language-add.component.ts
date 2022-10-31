@@ -19,7 +19,7 @@ export class LanguageAddComponent implements OnInit {
   levelsList: Dropdown[]=[];
   selectedLanguage: number;
   selectedLevel: number;
-  selectedNative: boolean;
+  selectedNative: boolean=false;
   isSuccess: boolean= false;
   successMsg: string;
   constructor(private dropdownService:DropdownService) {   

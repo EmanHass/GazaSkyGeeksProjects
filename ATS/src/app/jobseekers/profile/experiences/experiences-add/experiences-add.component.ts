@@ -49,7 +49,7 @@ export class ExperiencesAddComponent implements OnInit {
       cityId: new FormControl('',[Validators.required]),
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
-      presentStatus: new FormControl('false', [Validators.required]),
+      presentStatus: new FormControl(false, [Validators.required]),
       salary: new FormControl('', [Validators.required]),
     });
   }

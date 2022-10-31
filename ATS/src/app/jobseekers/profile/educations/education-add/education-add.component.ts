@@ -60,7 +60,7 @@ export class EducationAddComponent implements OnInit {
       universityId: new FormControl('', [Validators.required]),
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
-      presentStatus: new FormControl('false', [Validators.required]),
+      presentStatus: new FormControl(false, [Validators.required]),
     });
   }
 

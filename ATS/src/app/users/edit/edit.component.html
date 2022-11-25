@@ -1,0 +1,60 @@
+<div class="col-md-8">
+    <div class="card card-primary">
+       <div class="card-header">
+         <h3 class="card-title">Edit User</h3>
+       </div>
+   
+       <form role="form" [formGroup]="registrationFG">
+             <div class="card-body">
+             <div class="form-group row ">
+               <label for="inputId" class="col-sm-2 col-form-label">Id<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputId" placeholder="id" [class.error]="registrationFG.get('id').touched && registrationFG.get('id').errors != null" formControlName="id">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputFirstName" class="col-sm-2 col-form-label">First Name<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" [class.error]="registrationFG.get('firstName').touched && registrationFG.get('firstName').errors != null" formControlName="firstName">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputlastName" class="col-sm-2 col-form-label">Last Name<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputlastName" placeholder="Last Name" [class.error]="registrationFG.get('lastName').touched && registrationFG.get('lastName').errors != null" formControlName="lastName">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputemail" class="col-sm-2 col-form-label">Email<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputemail" placeholder="Email" [class.error]="registrationFG.get('email').touched && registrationFG.get('email').errors != null" formControlName="email"/>
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputRole" class="col-sm-2 col-form-label">Role<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputRole" placeholder="Role" [class.error]="registrationFG.get('role').touched && registrationFG.get('role').errors != null" formControlName="role">
+               </div>
+             </div>
+             
+             <div class="form-group row">
+               <div class="offset-sm-2 col-sm-10">
+                 <button type="submit" class="btn btn-success" (click)="onUpdateUser()">Submit</button>
+               </div>
+               <br/>
+               <br/>
+               <div *ngIf="isSuccess" class="alert alert-success alert-dismissible">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 <h6><i class="icon fas fa-check"></i> Success Edit!</h6>
+               </div>
+             </div>
+           </div>
+       </form>
+   
+       <div *ngIf="registrationFG.touched && !registrationFG.valid" class="alert alert-danger alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         <h5><i class="icon fas fa-ban"></i> Validation!</h5>
+          Please Fill the correct Data
+       </div>
+     </div>
+   </div>

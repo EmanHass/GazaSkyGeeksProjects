@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card card-widget">
+        <div class="card-header">
+          <div class="user-block">
+            <span class="username"><h4 class="text-primary">{{jobDetail.title}} <span class="badge badge-warning">${{jobDetail.expectedSalary.from}}-${{jobDetail.expectedSalary.to}}</span></h4></span>
+            <span class="description">{{sectorName}}</span>
+            
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="text-danger">Description</h5>
+          <p>{{jobDetail.description}}</p>
+
+          <h5 class="text-danger">Requiremenets</h5>
+          <div class="row">
+            <p>{{jobDetail.requirements}}</p>
+            <div class="col-md-4">
+              <p><span class="text-primary">Functional Area: </span>{{functionalArea}}</p>
+              <p><span class="text-primary">country: </span>{{country}}, {{city}}</p>
+              <p><span class="text-primary">Nationality: </span>{{nationality}}</p>
+              <p><span class="text-primary">Years Of Experience: </span>from {{jobDetail.yearsOfExperience.from}} to {{jobDetail.yearsOfExperience.to}} Years</p>
+            </div>
+            <div class="col-md-6">
+              <p><span class="text-primary">Education level: </span>{{lowEducationLevel}}, {{highEducationLevel}}</p>
+              <p><span class="text-primary">Languages: </span>{{languages}}</p>
+              <p><span class="text-primary">Skills: </span>{{skills}}</p>
+              <p><span class="text-primary">Job Type: </span>{{jobType}}</p>
+           </div>
+          </div>
+          <h5 class="text-success">Benefits</h5>
+          <span>{{benefits}}.</span>
+        </div>
+      </div>
+    </div>
+  </div>

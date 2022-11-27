@@ -8,7 +8,7 @@ export interface Job{
     functionalAreaId: number,
     countryId: number,
     cityId: number, 
-    yeasOfExperience: Range,
+    yearsOfExperience: Range,
     expectedSalary : Range,
     jobTypeId: number,
     lowEducationLevelId: number,

@@ -46,8 +46,8 @@ export class LanguagesComponent implements OnInit {
     },500)
   }
 
-  remove(id:number):void{
-    this.data=this.data.filter(val => val.id !== id);
+  remove(index:number):void{
+    this.data=this.data.filter((value, position) => !(position === index));
     this.onUpdate.emit(this.data);     
   }
 

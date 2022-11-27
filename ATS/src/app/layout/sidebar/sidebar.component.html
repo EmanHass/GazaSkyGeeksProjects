@@ -94,7 +94,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="['jobs']" [routerLinkActive]="'active'">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Jobs
@@ -103,17 +103,41 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" [routerLink]="['jobs/list']" [routerLinkActive]="'active'">
                   <i class="far fa-circle nav-icon"></i>
                   <p>List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" [routerLink]="['jobs/add']" [routerLinkActive]="'active'">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Job</p>
                 </a>
-              </li>          
+              </li> 
+
+              <li class="nav-item">
+                <a class="nav-link" [routerLinkActive]="'active'">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Applicants
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>List</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Application</p>
+                    </a>
+                  </li>          
+                </ul>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

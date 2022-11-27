@@ -1,43 +1,36 @@
 <div class="row">
     <div class="col-md-12">
-      <!-- Box Comment -->
       <div class="card card-widget">
         <div class="card-header">
           <div class="user-block">
-            <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
-            <span class="description">Shared publicly - 7:30 PM Today</span>
+            <span class="username"><h4 class="text-primary">{{jobDetail.title}} <span class="badge badge-warning">${{jobDetail.expectedSalary.from}}-${{jobDetail.expectedSalary.to}}</span></h4></span>
+            <span class="description">{{sectorName}}</span>
+            
           </div>
-          <!-- /.user-block -->
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
-              <i class="far fa-circle"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-            </button>
-          </div>
-          <!-- /.card-tools -->
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <!-- post text -->
-          <p>Far far away, behind the word mountains, far from the
-            countries Vokalia and Consonantia, there live the blind
-            texts. Separated they live in Bookmarksgrove right at</p>
+          <h5 class="text-danger">Description</h5>
+          <p>{{jobDetail.description}}</p>
 
-          <p>the coast of the Semantics, a large language ocean.
-            A small river named Duden flows by their place and supplies
-            it with the necessary regelialia. It is a paradisematic
-            country, in which roasted parts of sentences fly into
-            your mouth.</p>
+          <h5 class="text-danger">Requiremenets</h5>
+          <div class="row">
+            <p>{{jobDetail.requirements}}</p>
+            <div class="col-md-4">
+              <p><span class="text-primary">Functional Area: </span>{{functionalArea}}</p>
+              <p><span class="text-primary">country: </span>{{country}}, {{city}}</p>
+              <p><span class="text-primary">Nationality: </span>{{nationality}}</p>
+              <p><span class="text-primary">Years Of Experience: </span>from {{jobDetail.yearsOfExperience.from}} to {{jobDetail.yearsOfExperience.to}} Years</p>
+            </div>
+            <div class="col-md-6">
+              <p><span class="text-primary">Education level: </span>{{lowEducationLevel}}, {{highEducationLevel}}</p>
+              <p><span class="text-primary">Languages: </span>{{languages}}</p>
+              <p><span class="text-primary">Skills: </span>{{skills}}</p>
+              <p><span class="text-primary">Job Type: </span>{{jobType}}</p>
+           </div>
+          </div>
+          <h5 class="text-success">Benefits</h5>
+          <span>{{benefits}}.</span>
         </div>
-        <!-- /.card-body -->
-     
-        <!-- /.card-footer -->
-
-        <!-- /.card-footer -->
       </div>
-      <!-- /.card -->
     </div>
-    <!-- /.col -->
   </div>

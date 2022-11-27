@@ -11,7 +11,7 @@ export class JobsService {
       functionalAreaId: 1,
       countryId: 1,
       cityId: 1, 
-      yeasOfExperience: {
+      yearsOfExperience: {
         from:2,
         to:5
       },
@@ -19,9 +19,9 @@ export class JobsService {
         from:500,
         to:1500
       },
-      jobTypeId: 1,
+      jobTypeId: 2,
       lowEducationLevelId: 1,
-      highEducationLevelId: 1,
+      highEducationLevelId: 2,
       nationalityId: 1,
       languageIds:[1,2],
       skillIds:[1,2],
@@ -35,8 +35,8 @@ export class JobsService {
       sectorId:2,
       functionalAreaId: 2,
       countryId: 2,
-      cityId: 2, 
-      yeasOfExperience: {
+      cityId: 4, 
+      yearsOfExperience: {
         from:2,
         to:5
       },
@@ -45,23 +45,23 @@ export class JobsService {
         to:900
       },
       jobTypeId: 2,
-      lowEducationLevelId: 2,
-      highEducationLevelId: 1,
-      nationalityId: 1,
+      lowEducationLevelId: 1,
+      highEducationLevelId: 2,
+      nationalityId: 2,
       languageIds:[1,2],
       skillIds:[1,2],
       description: 'Backend development for cross platform app',
       requirements: "im looking for backend developer to do with making a complete solution",
-      benefitIds: [1,2]
+      benefitIds: [2,3]
     },
     {
       id: 3,
       title: 'Looking Full Stack Java Developer',
       sectorId:1,
-      functionalAreaId: 3,
+      functionalAreaId: 2,
       countryId: 1,
-      cityId: 1, 
-      yeasOfExperience: {
+      cityId: 2, 
+      yearsOfExperience: {
         from:2,
         to:5
       },
@@ -69,9 +69,9 @@ export class JobsService {
         from:1200,
         to:1900
       },
-      jobTypeId: 1,
+      jobTypeId: 2,
       lowEducationLevelId: 1,
-      highEducationLevelId: 1,
+      highEducationLevelId: 2,
       nationalityId: 1,
       languageIds:[1,2],
       skillIds:[1,2],
@@ -84,5 +84,8 @@ export class JobsService {
 
   getJobs():Job[]{
     return this.jobs;
+  }
+  getjobById(id:number): Job{
+    return this.jobs.find(val=> val.id == id);
   }
 }

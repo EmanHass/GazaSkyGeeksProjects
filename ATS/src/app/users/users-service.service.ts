@@ -24,8 +24,9 @@ export class UserserviceService {
   getUsers(): User[]{
     return this.users;
   }
-  addUser(user:User): void{
-    this.users.push(user);
+  addUser(user:User): void{ 
+    let newUser = {...user, id:Number(user.id)};
+    this.users.push(newUser);
   }
   getUserById(id: number): User {
     return this.users.find(val => val.id === id);

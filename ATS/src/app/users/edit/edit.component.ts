@@ -17,6 +17,9 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fillFormWithInfo();
+  }
+  fillFormWithInfo():void{
     this.route.params.subscribe((params: Params) => {
       this.id = Number(params['id']);
     });

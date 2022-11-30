@@ -38,12 +38,8 @@ export class DetailJobComponent implements OnInit {
         return null
       }
     }) 
-    console.log('before pop',this.benefits);
-
     this.benefits.pop();
-    this.benefits.join(',');
-    console.log(this.benefits);
-    
+    this.benefits.join(',');    
     this.functionalArea = (this.dropdownService.getFunctionalAreas().find(value=> value.id == this.jobDetail.functionalAreaId)).name;
     this.country = (this.dropdownService.getCountries().find(value=> value.id == this.jobDetail.countryId)).name;
     this.city = (this.dropdownService.getCities(0,true).find(value=> value.id == this.jobDetail.cityId)).name;
@@ -70,8 +66,4 @@ export class DetailJobComponent implements OnInit {
     this.skills.pop();
     this.skills.join(',');
   }
-
-
-
-
 }

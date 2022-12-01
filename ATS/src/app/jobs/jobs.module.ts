@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +19,8 @@ import { DetailJobComponent } from './detail-job/detail-job.component';
   imports: [
     CommonModule,
     JobsRoutingModule,
-    SharedModules
+    SharedModules,
+    ReactiveFormsModule
   ],
   providers:[JobsService]
 })

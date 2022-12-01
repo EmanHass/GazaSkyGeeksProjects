@@ -12,7 +12,11 @@ export class ListJobsComponent implements OnInit {
   constructor(private jobsService:JobsService) { }
 
   ngOnInit(): void {
-    this.listJobs = this.jobsService.getJobs();
+    this.listJobs = this.jobsService.getJobs().slice(0,5);
+  }
+
+  viewAllJobs(): void{
+    this.listJobs=this.jobsService.getJobs();
   }
 
 }

@@ -13,8 +13,8 @@
           <p>{{jobDetail.description}}</p>
 
           <h5 class="text-danger">Requiremenets</h5>
+          <p>{{jobDetail.requirements}}</p>
           <div class="row">
-            <p>{{jobDetail.requirements}}</p>
             <div class="col-md-4">
               <p><span class="text-primary">Functional Area: </span>{{functionalArea}}</p>
               <p><span class="text-primary">country: </span>{{country}}, {{city}}</p>
@@ -29,7 +29,7 @@
            </div>
           </div>
           <h5 class="text-success">Benefits</h5>
-          <span>{{benefits}}.</span>
+            <span class="badge badge-success" *ngFor="let benefit of benefits">{{benefit}}</span>
         </div>
       </div>
     </div>

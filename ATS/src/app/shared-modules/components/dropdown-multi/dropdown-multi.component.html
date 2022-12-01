@@ -1,0 +1,9 @@
+<ng-multiselect-dropdown 
+[settings]="dropdownSettings"
+ [data]="list" 
+ (onSelect)="onSelect($event)" 
+ (onSelectAll)="onSelectAll($event)"
+ (onDeSelectAll)="onUnSelectAll()"
+ (onDeSelect)="onItemDeSelect($event)"
+ >
+</ng-multiselect-dropdown>

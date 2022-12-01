@@ -263,4 +263,7 @@ export class JobsService {
   getjobById(id:number): Job{
     return this.jobs.find(val=> val.id == id);
   }
+  addJob(job:Job): void{
+    this.jobs.push(job);
+  }
 }

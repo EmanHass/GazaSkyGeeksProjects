@@ -1,5 +1,4 @@
 import { AppRoutingModule } from './app-routing.module';
-import { JobseekersModule } from './jobseekers/jobseekers.module';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModules } from './shared-modules/shared-modules.module';
 import { NgModule } from '@angular/core';

@@ -1,1 +1,136 @@
-<p>add-jobs works!</p>
+<div class="col-md-12">
+    <div class="card card-primary">
+       <div class="card-header">
+         <h3 class="card-title">Add New Job</h3>
+       </div>
+   
+       <form role="form" [formGroup]="registrationFG">
+             <div class="card-body">
+             <div class="form-group row ">
+               <label for="inputId" class="col-sm-2 col-form-label">Id<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputId" placeholder="id" [class.error]="registrationFG.get('id').touched && registrationFG.get('id').errors != null" formControlName="id">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputtitle" class="col-sm-2 col-form-label">Title<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputtitle" placeholder="Title" [class.error]="registrationFG.get('title').touched && registrationFG.get('title').errors != null" formControlName="title">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputsector" class="col-sm-2 col-form-label">Sector<span class="required">*</span></label>
+               <div class="col-sm-10">
+                 <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="sectorsList" (onItemSelect)="onItemSelect($event, 'sector')"></app-dropdown-single>
+                </div>
+              </div>
+             <div class="form-group row">
+               <label for="inputfunctionalArea" class="col-sm-2 col-form-label">Functional Area<span class="required">*</span></label>
+               <div class="col-sm-10">
+                <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="functionalAreaList" (onItemSelect)="onItemSelect($event, 'functionalArea')"></app-dropdown-single>
+              </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputcountry" class="col-sm-2 col-form-label">Country<span class="required">*</span></label>
+               <div class="col-sm-10">
+               <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="countryList" (onItemSelect)="onItemSelect($event, 'conutry')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputcity" class="col-sm-2 col-form-label">City<span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <app-dropdown-single [selesctedValue]="selectedCityId" [list]="cityList" (onItemSelect)="onItemSelect($event, 'city')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputyearsOfExperience" class="col-sm-2 col-form-label">Years Of Experience<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputyearsOfExperience" placeholder="Years Of Experience" [class.error]="registrationFG.get('yearsOfExperience').touched && registrationFG.get('yearsOfExperience').errors != null" formControlName="yearsOfExperience">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputexpectedSalary" class="col-sm-2 col-form-label">Expected Salary<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputexpectedSalary" placeholder="Expected Salary" [class.error]="registrationFG.get('expectedSalary').touched && registrationFG.get('expectedSalary').errors != null" formControlName="expectedSalary">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputjobType" class="col-sm-2 col-form-label">Job Type<span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <app-dropdown-single [list]="jobTypeList" (onItemSelect)="onItemSelect($event, 'jobType')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputlowEducationLevel" class="col-sm-2 col-form-label">Low Education Level<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="educationLevel" (onItemSelect)="onItemSelect($event, 'lowEducationLevel')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputhighEducationLevel" class="col-sm-2 col-form-label">High Education Level<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="educationLevel" (onItemSelect)="onItemSelect($event, 'highEducationLevel')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputnationality" class="col-sm-2 col-form-label">Nationality<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <app-dropdown-single [selesctedValue]="selectedCountryId" [list]="nationality" (onItemSelect)="onItemSelect($event, 'nationality')"></app-dropdown-single>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputlanguages" class="col-sm-2 col-form-label">Languages<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <app-dropdown-multi [list]="languages" (onItemSelect)="onItemSelect($event, 'languages')"></app-dropdown-multi>
+                  <!-- <input type="text" class="form-control" id="inputlanguages" placeholder="Languages" [class.error]="registrationFG.get('languageIds').touched && registrationFG.get('languageIds').errors != null" formControlName="languageIds"> -->
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputskills" class="col-sm-2 col-form-label">Skills<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputskills" placeholder="Skills" [class.error]="registrationFG.get('skillIds').touched && registrationFG.get('skillIds').errors != null" formControlName="skillIds">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputdescription" class="col-sm-2 col-form-label">Description<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <textarea type="t" class="form-control" id="inputdescription" placeholder="Description" [class.error]="registrationFG.get('description').touched && registrationFG.get('description').errors != null" formControlName="description">
+                    </textarea>
+
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputrequirements" class="col-sm-2 col-form-label">Requirements<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <textarea type="text" class="form-control" id="inputrequirements" placeholder="Requirements" [class.error]="registrationFG.get('requirements').touched && registrationFG.get('requirements').errors != null" formControlName="requirements">
+                </textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputbenefits" class="col-sm-2 col-form-label">Benefits<span class="required">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputbenefits" placeholder="Benefits" [class.error]="registrationFG.get('benefitIds').touched && registrationFG.get('benefitIds').errors != null" formControlName="benefitIds">
+                </div>
+              </div>
+             
+             <div class="form-group row">
+               <div class="offset-sm-2 col-sm-10">
+                 <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+               </div>
+               <br/>
+               <br/>
+               <div *ngIf="isSuccess" class="alert alert-success alert-dismissible">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 <h6><i class="icon fas fa-check"></i> Success Added!</h6>
+               </div>
+             </div>
+           </div>
+       </form>
+   
+       <div *ngIf="registrationFG.touched && !registrationFG.valid" class="alert alert-danger alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         <h5><i class="icon fas fa-ban"></i> Validation!</h5>
+          Please Fill the correct Data
+       </div>
+     </div>
+   </div>

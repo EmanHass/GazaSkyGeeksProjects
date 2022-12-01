@@ -22,21 +22,24 @@ export class DropdownMultiComponent implements OnInit {
   }
 
   onSelect(value:any){  
-    this.selesctedValue.push(value);         
+    this.selesctedValue.push(value); 
+    console.log('valuse selected: ',this.selesctedValue);
+            
     this.onItemSelect.emit(this.selesctedValue)   
   }
 
   onSelectAll(items: any[]) {
     this.selesctedValue = items;
+    console.log('select all: ',this.selesctedValue);
+    
     this.onItemSelect.emit(this.selesctedValue);
 }
 onItemDeSelect(item: any) {
   this.selesctedValue=this.selesctedValue.filter(val=> !(val.id == item.id))
 }
 onUnSelectAll(){
-  this.selesctedValue=null;
+  this.selesctedValue=[];
   console.log('unselect',this.selesctedValue);
-  
 }
 
 }

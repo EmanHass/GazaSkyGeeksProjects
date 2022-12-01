@@ -22,8 +22,13 @@ export class AddJobsComponent implements OnInit {
   functionalAreaList: Dropdown[];
   nationality: Dropdown[];
   educationLevel: Dropdown[];
-  languages: Dropdown[];
+  languagesList: Dropdown[];
   languagesSelected: number[]=[];
+  skillsList: Dropdown[];
+  skillsSelected: number[]=[];
+  benefitsList: Dropdown[];
+  benefitsSelected: number[]=[];
+
   constructor(private jobsService:JobsService, private router: Router, private dropdownService:DropdownService) {
     this.initializationFG();    
   }
@@ -35,35 +40,42 @@ export class AddJobsComponent implements OnInit {
     this.functionalAreaList = this.dropdownService.getFunctionalAreas();
     this.nationality = this.dropdownService.getNationality();
     this.educationLevel = this.dropdownService.getEducationLevel();
-    this.languages = this.dropdownService.getLanguages();
+    this.languagesList = this.dropdownService.getLanguages();
+    this.skillsList = this.dropdownService.getSkills();
+    this.benefitsList = this.dropdownService.getBenefits();
   }
   initializationFG(): void {
     this.registrationFG = new FormGroup({
       id: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
-      sectorId: new FormControl(''),
-      functionalAreaId: new FormControl(''),
-      countryId: new FormControl(''),
-      cityId: new FormControl(''),
-      yearsOfExperience: new FormControl('', [Validators.required]),
-      expectedSalary: new FormControl('', [Validators.required]),
-      jobTypeId: new FormControl(''),
-      lowEducationLevelId: new FormControl(''),
-      highEducationLevelId: new FormControl(''),
-      nationalityId: new FormControl(''),
-      skillIds: new FormControl('', [Validators.required]),
+      sectorId: new FormControl('', [Validators.required]),
+      functionalAreaId: new FormControl('', [Validators.required]),
+      countryId: new FormControl('', [Validators.required]),
+      cityId: new FormControl('', [Validators.required]),
+      yearsOfExperience: new FormGroup({
+        from: new FormControl('',[Validators.required]),
+        to: new FormControl('',[Validators.required])
+      }),
+      expectedSalary: new FormGroup({
+        from: new FormControl('',[Validators.required]),
+        to: new FormControl('',[Validators.required])
+      }),
+      jobTypeId: new FormControl('', [Validators.required]),
+      lowEducationLevelId: new FormControl('', [Validators.required]),
+      highEducationLevelId: new FormControl('', [Validators.required]),
+      nationalityId: new FormControl('', [Validators.required]),
+      skillIds: new FormControl([], [Validators.required]),
       description: new FormControl('', [Validators.required]),
       requirements: new FormControl('', [Validators.required]),
-      benefitIds: new FormControl('', [Validators.required]),
+      benefitIds: new FormControl([], [Validators.required]),
+      languageIds: new FormControl([], [Validators.required])
     });
   }
   onSubmit():void{  
     
     if(this.registrationFG.valid){ 
-      let newid = this.registrationFG.get('id').value;
-      
-      let newJob: Job = {...this.registrationFG.value, id:Number(newid), languageIds:this.languagesSelected}     
-      this.jobsService.addJob(newJob);
+      let newId = this.registrationFG.get('id').value;    
+      this.jobsService.addJob(this.registrationFG.value);
      
       this.isSuccess = true;
       setTimeout(()=>{
@@ -94,10 +106,29 @@ export class AddJobsComponent implements OnInit {
     }else if(type == 'jobType'){
       this.registrationFG.get('jobTypeId').setValue(id);
     }else if(type == 'languages'){
+      this.languagesSelected=[];
       event.forEach((element:any) => {
        this.languagesSelected.push(element.id);
+       this.registrationFG.get('languageIds').setValue(this.languagesSelected);
+       console.log('values',this.registrationFG.value);
+       
       });
-    
+    }else if(type == 'skills'){
+      this.skillsSelected=[];
+      event.forEach((element:any) => {
+        this.skillsSelected.push(element.id);
+        this.registrationFG.get('skillIds').setValue(this.skillsSelected);
+        console.log('form',this.registrationFG.value);
+        
+       });
+    }else if(type == 'benefits'){
+      this.benefitsSelected=[];
+      event.forEach((element:any) => {
+        this.benefitsSelected.push(element.id);
+        this.registrationFG.get('benefitIds').setValue(this.benefitsSelected);
+       });
+       console.log(this.benefitsSelected);
+       
     }
   }
 

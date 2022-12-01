@@ -42,17 +42,24 @@
                     <app-dropdown-single [selesctedValue]="selectedCityId" [list]="cityList" (onItemSelect)="onItemSelect($event, 'city')"></app-dropdown-single>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" formGroupName="yearsOfExperience">
                 <label for="inputyearsOfExperience" class="col-sm-2 col-form-label">Years Of Experience<span class="required">*</span></label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputyearsOfExperience" placeholder="Years Of Experience" [class.error]="registrationFG.get('yearsOfExperience').touched && registrationFG.get('yearsOfExperience').errors != null" formControlName="yearsOfExperience">
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="inputyearsOfExperience" placeholder="From" [class.error]="registrationFG.get('yearsOfExperience').get('from').touched && registrationFG.get('yearsOfExperience').get('from').errors != null" formControlName="from">
+                 </div>
+                 <div class="col-sm-4">
+                  <input type="text" class="form-control" id="inputyearsOfExperience" placeholder="To" [class.error]="registrationFG.get('yearsOfExperience').get('to').touched && registrationFG.get('yearsOfExperience').get('to').errors != null" formControlName="to">
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" formGroupName="expectedSalary">
                 <label for="inputexpectedSalary" class="col-sm-2 col-form-label">Expected Salary<span class="required">*</span></label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputexpectedSalary" placeholder="Expected Salary" [class.error]="registrationFG.get('expectedSalary').touched && registrationFG.get('expectedSalary').errors != null" formControlName="expectedSalary">
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="inputexpectedSalary" placeholder="From" [class.error]="registrationFG.get('expectedSalary').get('from').touched && registrationFG.get('expectedSalary').get('from').errors != null" formControlName="from">
                 </div>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="inputexpectedSalary" placeholder="To" [class.error]="registrationFG.get('expectedSalary').get('to').touched && registrationFG.get('expectedSalary').get('to').errors != null" formControlName="to">
+                </div>
+                
               </div>
               <div class="form-group row">
                 <label for="inputjobType" class="col-sm-2 col-form-label">Job Type<span class="required">*</span></label>
@@ -81,14 +88,13 @@
               <div class="form-group row">
                 <label for="inputlanguages" class="col-sm-2 col-form-label">Languages<span class="required">*</span></label>
                 <div class="col-sm-10">
-                  <app-dropdown-multi [list]="languages" (onItemSelect)="onItemSelect($event, 'languages')"></app-dropdown-multi>
-                  <!-- <input type="text" class="form-control" id="inputlanguages" placeholder="Languages" [class.error]="registrationFG.get('languageIds').touched && registrationFG.get('languageIds').errors != null" formControlName="languageIds"> -->
+                  <app-dropdown-multi [list]="languagesList" (onItemSelect)="onItemSelect($event, 'languages')"></app-dropdown-multi>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="inputskills" class="col-sm-2 col-form-label">Skills<span class="required">*</span></label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputskills" placeholder="Skills" [class.error]="registrationFG.get('skillIds').touched && registrationFG.get('skillIds').errors != null" formControlName="skillIds">
+                  <app-dropdown-multi [list]="skillsList" (onItemSelect)="onItemSelect($event, 'skills')"></app-dropdown-multi>
                 </div>
               </div>
               <div class="form-group row">
@@ -109,7 +115,7 @@
               <div class="form-group row">
                 <label for="inputbenefits" class="col-sm-2 col-form-label">Benefits<span class="required">*</span></label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputbenefits" placeholder="Benefits" [class.error]="registrationFG.get('benefitIds').touched && registrationFG.get('benefitIds').errors != null" formControlName="benefitIds">
+                  <app-dropdown-multi [list]="benefitsList" (onItemSelect)="onItemSelect($event, 'benefits')"></app-dropdown-multi>
                 </div>
               </div>
              
